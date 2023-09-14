@@ -26,12 +26,11 @@ def criar_conexao():
             host=host
         )
         print("Conexão bem-sucedida!")
-
+        return conn
     except psycopg2.Error as e:
         print("Erro ao conectar ao banco de dados:", e)
-
-    return conn
-
+        return None
+    
 if __name__ == '__main__':
     criar_conexao()
         
