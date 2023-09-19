@@ -11,8 +11,8 @@ def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", naci
     cursor = conexao_banco.cursor()
 
     # Selecionando o cliente pelo cpf
-    cliente = cursor.execute(f"""SELECT * FROM private.clientes WHERE cpf={cpf}""")
-    cliente = cursor.fetchall()
+    cliente = cursor.execute(f"""SELECT * FROM private.cliente WHERE cpf='{cpf}'""")
+    cliente = list(cursor.fetchall()[0])
 
     # Data da atualização cadastral
     ultima_atualizacao = datetime.now().strftime('%d-%m-%Y')
@@ -82,11 +82,22 @@ def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", naci
             return [False, "CEP inválido"]
     
     try:
-        cursor.execute(f"""UPDATE private.clientes SET (cpf, nome, email, telefone, data_nascimento, nacionalidade, estado_civil, 
-                                    renda_mensal, logradouro, bairro, cidade, estado, cep, ultima_atualizacao)
-                            VALUES ('{cpf}', '{nome}', '{email}', '{telefone}', '{data_nascimento}', '{nacionalidade}', '{estado_civil}', 
-                            {renda_mensal}, '{logradouro}', '{bairro}', '{cidade}', '{estado}', '{cep}', '{ultima_atualizacao}');"""
-                        )
+        cursor.execute(
+            f"""UPDATE private.cliente SET  nome = '{cliente[1]}',
+                                            email = '{cliente[2]}',
+                                            telefone = '{cliente[3]}',
+                                            data_nascimento = '{cliente[4]}',
+                                            nacionalidade = '{cliente[5]}',
+                                            estado_civil = '{cliente[6]}',
+                                            renda_mensal = {cliente[7]},
+                                            logradouro = '{cliente[8]}',
+                                            bairro = '{cliente[9]}',
+                                            cidade = '{cliente[10]}',
+                                            estado = '{cliente[11]}',
+                                            cep = '{cliente[12]}',
+                                            ultima_atualizacao = '{ultima_atualizacao}'
+                WHERE cpf = '{cpf}';"""
+                )
         conexao_banco.commit()
         cursor.close()
         conexao_banco.close()
@@ -97,8 +108,7 @@ def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", naci
         return [False, erro]
 
 
-    
-
+print(update_cliente("12843361400", 'ivo', "ivo.araujo@gmail.com"))
 
     
 
