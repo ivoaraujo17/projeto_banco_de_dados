@@ -1,6 +1,5 @@
 from conexao_banco import criar_conexao
 from datetime import datetime
-from validate_docbr import CPF
 from email_validator import validate_email, EmailNotValidError
 from phone_validate import trata_telefone
 import brazilcep
