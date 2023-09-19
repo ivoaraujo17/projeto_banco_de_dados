@@ -6,13 +6,17 @@ def deletar_cliente(cpf):
     #cria um cursor para executar comandos no banco de dados
     cursor = conn.cursor()
     #cria uma string com o comando SQL para deletar um cliente
-    comando_sql = f"""DELETE FROM private.cliente WHERE cpf = '{cpf}';"""
-    #execute o comando SQL
-    cursor.execute(comando_sql)
-    #salva as alterações no banco de dados
-    conn.commit()
-    #fecha a conexão com o banco de dados
-    conn.close()
-    #retorne uma mensagem de sucesso
-    return "Cliente deletado com sucesso"
+    #crie um tratamento de erro para o caso de o cpf não existir no banco de dados
+    try:
+        cursor.execute(f"""DELETE FROM private.cliente WHERE cpf = '{cpf}';""")
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return [True, "Cliente deletado com sucesso"]
+    except:
+        cursor.close()
+        conn.close()
+        return [False, "Cliente não encontrado"]
+    
+    
     
