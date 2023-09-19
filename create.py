@@ -20,7 +20,7 @@ def create_cliente(cpf, nome, email, telefone, data_nascimento, nacionalidade, e
         data_entrada = datetime.now().strftime('%d-%m-%Y')
 
     # data_atualizacao recebe a data atual
-    ultima_atualizacao = datetime.now()
+    ultima_atualizacao = datetime.now().strftime('%d-%m-%Y')
 
     # verifica se cpf é válido
     if not validador_cpf.validate(cpf):
@@ -77,7 +77,7 @@ def create_cliente(cpf, nome, email, telefone, data_nascimento, nacionalidade, e
     
     # verifica se cep é válido
     try:
-        endereco = brazilcep.get_address_from_cep(cep)
+        brazilcep.get_address_from_cep(cep)
     except:
         return [False, "CEP inválido"]
 
@@ -96,10 +96,14 @@ def create_cliente(cpf, nome, email, telefone, data_nascimento, nacionalidade, e
                         );"""
                         )
         conexao_banco.commit()
+        cursor.close()
+        conexao_banco.close()
         return [True, "Cliente criado com sucesso"]
+        
     except psycopg2.Error as erro:
+        cursor.close()
+        conexao_banco.close()
         return [False, erro]
     
-    cursor.close()
-    conexao_banco.close()
+    
     
