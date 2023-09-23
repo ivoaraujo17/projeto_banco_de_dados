@@ -1,0 +1,44 @@
+#homepage {
+    overflow: hidden;
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 80vh;
+  }
+
+#texto1{
+    font-size: 50px;
+    margin-top: -100px;
+    margin-bottom: 70px;   
+}
+#texto2{
+    margin-bottom: 50px;
+}
+
+/*tipos de conta*/
+
+#poupanca{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+
+}
+#corrente{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+#salario{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
