@@ -1,0 +1,191 @@
+/*Header*/
+#header {
+  width: 100%;
+  display: flex;
+  background: linear-gradient(90deg, rgba(6,1,83,1) 0%, rgba(9,9,121,1) 88%, rgba(2,2,129,1) 100%);
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+#logo-header{
+  margin: auto 8vh;
+}
+#logo-header img{
+  height: 12vh;
+  max-height: 70px;
+  min-height: 50px;
+}
+#menu-header {
+  margin-right: 20px;
+  display: flex;
+  gap: 50px;
+}
+
+#menu-header a {
+  text-decoration: none;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.button_descricao {
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  background-color:transparent ;
+
+  
+}
+.descricao-header {
+  color: white;
+}
+
+.noticias-header {
+  color: white;
+}
+
+.login-header {
+  max-width: 140px;
+  text-align: center;
+  padding: 1vh 4vw;
+  background-color: white;
+  border-radius: 50px;
+  
+}
+@media screen and (max-width: 6140px)  {
+.login-header {
+  max-width: 140px;
+  text-align: center;
+  padding: 1vh 2vw;
+}
+}
+
+@media screen and (max-width: 1300px)  {
+.login-header {
+  max-width: 140px;
+  text-align: center;
+  padding: 1vh 3vw;
+}
+}
+
+@media screen and (max-width: 670px)  {
+#header {
+  
+  flex-direction: column;
+
+}
+#menu-header {
+  margin-bottom: 20px;
+  margin-right: 0px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly
+}
+
+}
+/*Login*/
+#login {
+    overflow: hidden;
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 80vh;
+  }
+  
+  #login-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255);
+    height: 70%;
+    width: 40%;
+    min-width: 400px;
+  }
+  
+  #login-main input {
+    padding: 1.5vh 6vw;
+    border-color: #80d78d;
+    border-radius: 20px;
+    align-items: start;
+    justify-items: start;
+  }
+  
+  #login img {
+    width: 100%;
+  }
+  
+  #loginsup {
+    color: #0080CB;
+    font-size: 2.4rem;
+    margin: 6vh auto ;
+  }
+  
+  #usuario {
+    padding: 25px;
+  }
+  
+  .button_login {
+    cursor: pointer;
+    margin-top: 10vh;
+    background-color: #2090d2;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    padding: 1vh 4vw;
+    font-size: 1.4rem;
+  }
+  
+  @media screen and (max-height: 750px)  {
+
+    #login-main {
+        height: 60%;
+        width: 30%;
+    }
+
+    #loginsup{
+        margin: 3vh auto;
+        font-size: 2rem;
+    }
+
+    #login .button_login {
+        margin-top: 5vh;
+    }
+}
+
+@media screen and (max-height: 600px)  {
+
+    #login-main {
+        height: 50%;
+        width: 20%;
+    }
+
+    #loginsup{
+        margin: 2vh auto;
+        font-size: 1.4rem;
+    }
+
+    #login .button_login {
+        margin-top: 2vh;
+    }
+}
+
+@media screen and (max-height: 590px)  {
+
+  #login-main {
+      height: 70%;
+  }
+  #login .button_login {
+    margin-top: 10vh;
+}
+} 
+@media screen and (max-height: 490px)  {
+
+  #login-main {
+      height: 80%;
+  }
+  #login .button_login {
+    margin-top: 6vh;
+}
+}

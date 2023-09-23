@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-US">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Homepage </title>
+    <script src="{% static 'homepage/login.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/homepage/login.css' %}">
+    </head>
+<body>
+    <div id="logo-header">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" />
+    </div>
+
+    <nav id="menu-header">
+        <button className= "button_descricao" ><a href='#descricao'> <p className="descricao-header">Descrição</p></a></button>
+        <button className= "button_descricao"><a href='#noticias'> <p className="noticias-header">Notícias</p></a></button>
+        <button className= "button_descricao"><a href='#login'> <p className="login-header">Login</p></a></button>
+    </nav>    
+    <div id="login-main">
+        <div id="loginsup">
+            <h2>Login</h2>
+        </div>
+    <div id="usuario">
+        <input type="text" name="Usuario" placeholder="Usuário" id="login-usuario"/>
+    </div>
+    <div id="-senha">
+        <input type="password" name="Senha" placeholder="Senha" id="login-senha"/>
+    </div>
+    <div id="logininf">
+        <button class= "button_login"><p class="login">LOGIN</p></button>
+    </div>
+</div>
+</body>
+</html>
