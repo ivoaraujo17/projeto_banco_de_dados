@@ -1,0 +1,31 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title %}
+    Zenith Capital Criar Conta
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {% if field.label == "Usuário" %}
+                    <label for="{{ field.id_for_label }}">Email</label>
+                {% else %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% endif %}
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <small class="form-text text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button class="bg-green-500" type="submit">Criar Conta</button>
+    </form>
+{% endblock %}

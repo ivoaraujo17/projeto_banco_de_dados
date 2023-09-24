@@ -9,17 +9,16 @@
 {% endblock %}
 
 {% block content %}
-    <div id="login-main">
-        <div id="loginsup">
-            <h2>Login</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Email:</label>
+            {{ form.username }}
         </div>
-    <div id="usuario">
-        <input type="text" name="Usuario" placeholder="Usuário" id="login-usuario"/>
-    </div>
-    <div id="-senha">
-        <input type="password" name="Senha" placeholder="Senha" id="login-senha"/>
-    </div>
-    <div id="logininf">
-        <button class= "button_login"><p class="login">LOGIN</p></button>
-    </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            {{ form.password }}
+        </div>
+        <button type="submit">Entrar</button>
+    </form>
 {% endblock %}
