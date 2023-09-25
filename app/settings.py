@@ -22,8 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-od@=ruf8ae@v2cl=1eojm6_vv@s081v7z9)50synzi!s3_&o$w'
 
-AUTH_USER_MODEL = 'homepage.CustomUser'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -40,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'homepage',
+    'cliente'
 ]
 
 MIDDLEWARE = [

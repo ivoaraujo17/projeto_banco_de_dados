@@ -1,6 +1,6 @@
 from django import forms
-from .models import CustomUser
-
+#from .models import CustomUser
+"""
 class FormCriarConta(forms.ModelForm):
     password1 = forms.CharField(label='Senha', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirmação de Senha', widget=forms.PasswordInput)
@@ -24,3 +24,4 @@ class FormCriarConta(forms.ModelForm):
             'estado',
             'cep',
         ]
+        """
