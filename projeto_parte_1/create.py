@@ -7,7 +7,7 @@ import brazilcep
 import psycopg2
 
 
-def create_cliente(cursor, cpf, nome, email, telefone, data_nascimento, 
+def create_cliente(conexao, cursor, cpf, nome, email, telefone, data_nascimento, 
                    nacionalidade, estado_civil, renda_mensal, logradouro, bairro, cidade, 
                    estado, cep, data_entrada=""):
     validador_cpf  = CPF()
@@ -74,9 +74,7 @@ def create_cliente(cursor, cpf, nome, email, telefone, data_nascimento,
         return [False, "Estado inválido"]
     
     # verifica se cep é válido
-    try:
-        brazilcep.get_address_from_cep(cep)
-    except:
+    if len(cep) != 8:
         return [False, "CEP inválido"]
 
     # verifica se data_entrada é uma data válida ou se não é do tipo datetime
@@ -93,7 +91,7 @@ def create_cliente(cursor, cpf, nome, email, telefone, data_nascimento,
                             '{ultima_atualizacao}'
                         );"""
                         )
-        cursor.comit()
+        conexao.commit()
         return [True, "Cliente criado com sucesso"]
         
     except psycopg2.Error as erro:
