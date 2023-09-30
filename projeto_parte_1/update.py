@@ -2,17 +2,17 @@ from conexao_banco import criar_conexao
 from datetime import datetime
 from email_validator import validate_email, EmailNotValidError
 from phone_validate import trata_telefone
-import brazilcep
 import psycopg2
+from read import pesquisar_usando_cpf
 
-def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", nacionalidade="", estado_civil="", 
+def update_cliente(conexao_banco, cursor, cpf, nome="", email="", telefone="", data_nascimento="", nacionalidade="", estado_civil="", 
                     renda_mensal="", logradouro="", bairro="", cidade="", estado="", cep=""):
-    conexao_banco = criar_conexao()
-    cursor = conexao_banco.cursor()
-
+    
+    pesquisa = pesquisar_usando_cpf(cursor, cpf)
+    if not pesquisa[0]:
+        return pesquisa
     # Selecionando o cliente pelo cpf
-    cliente = cursor.execute(f"""SELECT * FROM private.cliente WHERE cpf='{cpf}'""")
-    cliente = list(cursor.fetchall()[0])
+    cliente = list(pesquisa[1][0])
 
     # Data da atualização cadastral
     ultima_atualizacao = datetime.now().strftime('%d-%m-%Y')
@@ -75,10 +75,7 @@ def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", naci
     
     # Verificando se o cep deve ser alterado e alterando-o
     if cep != "":
-        try:
-            brazilcep.get_address_from_cep(cep)
-            cliente[12] = cep
-        except:
+        if len(cep) != 8:
             return [False, "CEP inválido"]
     
     try:
@@ -99,16 +96,10 @@ def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", naci
                 WHERE cpf = '{cpf}';"""
                 )
         conexao_banco.commit()
-        cursor.close()
-        conexao_banco.close()
         return [True, "Cliente atualizado com sucesso!"]
+    
     except psycopg2.Error as erro:
-        cursor.close()
-        conexao_banco.close()
         return [False, erro]
-
-
-print(update_cliente("12843361400", 'ivo', "ivo.araujo@gmail.com"))
 
     
 

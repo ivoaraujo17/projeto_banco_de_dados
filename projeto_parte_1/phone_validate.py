@@ -2,7 +2,7 @@ from phonenumbers import PhoneNumberFormat, parse as phone_parse, format_number 
 
 def trata_telefone(telefone):
     phone = phone_format(phone_parse(telefone, 'BR'), PhoneNumberFormat.E164)
-    print(phone)
+
     # adiciona 9 depois do DDD
     if len(phone) == 13:
         phone = phone[:5] + "9" + phone[5:]
