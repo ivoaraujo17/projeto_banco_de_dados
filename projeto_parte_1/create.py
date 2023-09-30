@@ -7,11 +7,9 @@ import brazilcep
 import psycopg2
 
 
-def create_cliente(cpf, nome, email, telefone, data_nascimento, nacionalidade, estado_civil, 
-                    renda_mensal, logradouro, bairro, cidade, estado, cep, data_entrada=""):
-    # Variaveis auxiliares
-    conexao_banco = criar_conexao()
-    cursor = conexao_banco.cursor()
+def create_cliente(cursor, cpf, nome, email, telefone, data_nascimento, 
+                   nacionalidade, estado_civil, renda_mensal, logradouro, bairro, cidade, 
+                   estado, cep, data_entrada=""):
     validador_cpf  = CPF()
 
     # verifica se data_entrada é uma data válida, se valor for vazio ou se não for do tipo datetime, 
@@ -95,14 +93,10 @@ def create_cliente(cpf, nome, email, telefone, data_nascimento, nacionalidade, e
                             '{ultima_atualizacao}'
                         );"""
                         )
-        conexao_banco.commit()
-        cursor.close()
-        conexao_banco.close()
+        cursor.comit()
         return [True, "Cliente criado com sucesso"]
         
     except psycopg2.Error as erro:
-        cursor.close()
-        conexao_banco.close()
         return [False, erro]
     
     
