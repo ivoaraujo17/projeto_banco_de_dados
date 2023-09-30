@@ -129,6 +129,10 @@ MEDIA_ROOT = [
     BASE_DIR / "media",
 ]
 
+LOGIN_REDIRECT_URL = 'homepage:homepage'
+LOGIN_URL = 'cliente:login'
+LOGOUT_REDIRECT_URL = 'homepage:logout'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
