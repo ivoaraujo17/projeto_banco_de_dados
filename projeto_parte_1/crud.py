@@ -21,10 +21,10 @@ class Crud():
         
     def criar_cliente(self, cpf, nome, email, telefone, data_nascimento, nacionalidade, 
                        estado_civil, renda_mensal, logradouro, bairro, cidade, 
-                        estado, cep, data_entrada=""):
+                        estado, cep):
         result = create_cliente(self.conexao, self.cursor, cpf, nome, email, telefone, data_nascimento, 
                    nacionalidade, estado_civil, renda_mensal, logradouro, bairro, cidade, 
-                   estado, cep, data_entrada)
+                   estado, cep, data_entrada="")
         return result
 
 
