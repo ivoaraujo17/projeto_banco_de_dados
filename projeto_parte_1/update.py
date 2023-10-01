@@ -2,21 +2,34 @@ from conexao_banco import criar_conexao
 from datetime import datetime
 from email_validator import validate_email, EmailNotValidError
 from phone_validate import trata_telefone
-import brazilcep
 import psycopg2
+from read import pesquisar_usando_cpf
 
-def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", nacionalidade="", estado_civil="", 
+
+def update_cliente(conexao_banco, cursor, cpf, nome="", email="", telefone="", data_nascimento="", nacionalidade="", estado_civil="", 
                     renda_mensal="", logradouro="", bairro="", cidade="", estado="", cep=""):
-    conexao_banco = criar_conexao()
-    cursor = conexao_banco.cursor()
-
+    
+    pesquisa = pesquisar_usando_cpf(cursor, cpf)
+    if not pesquisa[0]:
+        return pesquisa
     # Selecionando o cliente pelo cpf
-    cliente = cursor.execute(f"""SELECT * FROM private.cliente WHERE cpf='{cpf}'""")
-    cliente = list(cursor.fetchall()[0])
+    cliente = list(pesquisa[1][0])
 
     # Data da atualização cadastral
+
+    """
+        if (nome=="" and email=="" and telefone=="" and data_nascimento=="" and nacionalidade=="" and estado_civil=="" and 
+        renda_mensal=="" and logradouro=="" and bairro=="" and cidade=="" and estado=="" and cep==""):
+        print("entrou no if tudo vazio")
+        pass
+    else:
+        print("Entrou no else, nao esta vazio")   
+        ultima_atualizacao = datetime.now().strftime('%d-%m-%Y')
+    """
     ultima_atualizacao = datetime.now().strftime('%d-%m-%Y')
 
+    
+    """
     # Verificando se o nome deve ser alterado e alterando-0
     if nome != "" and type(nome) == str:
         cliente[1] = nome
@@ -54,8 +67,17 @@ def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", naci
         cliente[6] = estado_civil
     
     # Verificando se a renda mensal deve ser alterada e alterando-a
-    if renda_mensal != "" and type(renda_mensal) == float and renda_mensal > 0:
-        cliente[7] = renda_mensal
+    if renda_mensal != "":
+        try:
+            renda_mensal = float(renda_mensal)
+            if renda_mensal > 0:
+                cliente[7] = renda_mensal
+            else:
+                return [False, "Renda mensal inválida"]
+        except:
+            print("Formato de renda invalido.")
+            return [False, "Renda mensal inválida"]
+        
     
     # Verificando se o logradouro deve ser alterado e alterando-o
     if logradouro != "" and type(logradouro) == str:
@@ -75,12 +97,35 @@ def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", naci
     
     # Verificando se o cep deve ser alterado e alterando-o
     if cep != "":
-        try:
-            brazilcep.get_address_from_cep(cep)
-            cliente[12] = cep
-        except:
+        if len(cep) != 8:
             return [False, "CEP inválido"]
-    
+        cliente[12] = cep
+        """
+    if nome != "":
+        cliente[1] = nome
+    if email != "":
+        cliente[2] = email
+    if telefone != "":
+        cliente[3] = telefone
+    if data_nascimento != "":
+        cliente[4] = data_nascimento
+    if nacionalidade != "":
+        cliente[5] = nacionalidade
+    if estado_civil != "":
+        cliente[6] = estado_civil
+    if renda_mensal != "":
+        cliente[7] = renda_mensal
+    if logradouro != "":
+        cliente[8] = logradouro
+    if bairro != "":
+        cliente[9] = bairro
+    if cidade != "":
+        cliente[10] = cidade
+    if estado != "":
+        cliente[11] = estado
+    if cep != "":
+        cliente[12] = cep
+
     try:
         cursor.execute(
             f"""UPDATE private.cliente SET  nome = '{cliente[1]}',
@@ -99,16 +144,10 @@ def update_cliente(cpf, nome="", email="", telefone="", data_nascimento="", naci
                 WHERE cpf = '{cpf}';"""
                 )
         conexao_banco.commit()
-        cursor.close()
-        conexao_banco.close()
         return [True, "Cliente atualizado com sucesso!"]
+    
     except psycopg2.Error as erro:
-        cursor.close()
-        conexao_banco.close()
         return [False, erro]
-
-
-print(update_cliente("12843361400", 'ivo', "ivo.araujo@gmail.com"))
 
     
 

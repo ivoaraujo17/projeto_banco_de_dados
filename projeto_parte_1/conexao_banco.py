@@ -4,7 +4,7 @@ import os
 def senha_banco():
     try:
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        caminho = os.path.join(base_dir, '..', 'senha_banco.txt')
+        caminho = os.path.join(base_dir, "..", "..", 'senha_banco.txt')
         with open(caminho) as senha_banco:
             senha = senha_banco.read()
         return senha
