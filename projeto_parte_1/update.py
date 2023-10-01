@@ -69,14 +69,9 @@ def update_cliente(conexao_banco, cursor, cpf, nome="", email="", telefone="", d
     # Verificando se a renda mensal deve ser alterada e alterando-a
     if renda_mensal != "":
         try:
-            print("Tentando converter a renda")
             renda_mensal = float(renda_mensal)
-            print("Renda convertida")
             if renda_mensal > 0:
-                print("Tentando atribuir a renda a coluna")
                 cliente[7] = renda_mensal
-                print("Renda atribuida a coluna")
-                return [True, renda_mensal]
             else:
                 return [False, "Renda mensal inválida"]
         except:
