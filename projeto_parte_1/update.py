@@ -29,7 +29,7 @@ def update_cliente(conexao_banco, cursor, cpf, nome="", email="", telefone="", d
     ultima_atualizacao = datetime.now().strftime('%d-%m-%Y')
 
     
-
+    """
     # Verificando se o nome deve ser alterado e alterando-0
     if nome != "" and type(nome) == str:
         cliente[1] = nome
@@ -100,7 +100,32 @@ def update_cliente(conexao_banco, cursor, cpf, nome="", email="", telefone="", d
         if len(cep) != 8:
             return [False, "CEP inválido"]
         cliente[12] = cep
-    
+        """
+    if nome != "":
+        cliente[1] = nome
+    if email != "":
+        cliente[2] = email
+    if telefone != "":
+        cliente[3] = telefone
+    if data_nascimento != "":
+        cliente[4] = data_nascimento
+    if nacionalidade != "":
+        cliente[5] = nacionalidade
+    if estado_civil != "":
+        cliente[6] = estado_civil
+    if renda_mensal != "":
+        cliente[7] = renda_mensal
+    if logradouro != "":
+        cliente[8] = logradouro
+    if bairro != "":
+        cliente[9] = bairro
+    if cidade != "":
+        cliente[10] = cidade
+    if estado != "":
+        cliente[11] = estado
+    if cep != "":
+        cliente[12] = cep
+
     try:
         cursor.execute(
             f"""UPDATE private.cliente SET  nome = '{cliente[1]}',
