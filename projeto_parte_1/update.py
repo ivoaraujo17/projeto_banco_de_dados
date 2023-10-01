@@ -5,6 +5,7 @@ from phone_validate import trata_telefone
 import psycopg2
 from read import pesquisar_usando_cpf
 
+
 def update_cliente(conexao_banco, cursor, cpf, nome="", email="", telefone="", data_nascimento="", nacionalidade="", estado_civil="", 
                     renda_mensal="", logradouro="", bairro="", cidade="", estado="", cep=""):
     
@@ -15,7 +16,19 @@ def update_cliente(conexao_banco, cursor, cpf, nome="", email="", telefone="", d
     cliente = list(pesquisa[1][0])
 
     # Data da atualização cadastral
+
+    """
+        if (nome=="" and email=="" and telefone=="" and data_nascimento=="" and nacionalidade=="" and estado_civil=="" and 
+        renda_mensal=="" and logradouro=="" and bairro=="" and cidade=="" and estado=="" and cep==""):
+        print("entrou no if tudo vazio")
+        pass
+    else:
+        print("Entrou no else, nao esta vazio")   
+        ultima_atualizacao = datetime.now().strftime('%d-%m-%Y')
+    """
     ultima_atualizacao = datetime.now().strftime('%d-%m-%Y')
+
+    
 
     # Verificando se o nome deve ser alterado e alterando-0
     if nome != "" and type(nome) == str:
@@ -54,8 +67,22 @@ def update_cliente(conexao_banco, cursor, cpf, nome="", email="", telefone="", d
         cliente[6] = estado_civil
     
     # Verificando se a renda mensal deve ser alterada e alterando-a
-    if renda_mensal != "" and type(renda_mensal) == float and renda_mensal > 0:
-        cliente[7] = renda_mensal
+    if renda_mensal != "":
+        try:
+            print("Tentando converter a renda")
+            renda_mensal = float(renda_mensal)
+            print("Renda convertida")
+            if renda_mensal > 0:
+                print("Tentando atribuir a renda a coluna")
+                cliente[7] = renda_mensal
+                print("Renda atribuida a coluna")
+                return [True, renda_mensal]
+            else:
+                return [False, "Renda mensal inválida"]
+        except:
+            print("Formato de renda invalido.")
+            return [False, "Renda mensal inválida"]
+        
     
     # Verificando se o logradouro deve ser alterado e alterando-o
     if logradouro != "" and type(logradouro) == str:
@@ -77,6 +104,7 @@ def update_cliente(conexao_banco, cursor, cpf, nome="", email="", telefone="", d
     if cep != "":
         if len(cep) != 8:
             return [False, "CEP inválido"]
+        cliente[12] = cep
     
     try:
         cursor.execute(
