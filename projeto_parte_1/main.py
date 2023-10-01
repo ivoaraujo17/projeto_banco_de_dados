@@ -67,10 +67,10 @@ while True:
                 ccep = crud.validar_cep(input("CEP inválido. Insira o CEP: \n"))
 
             
-            crud.criar_cliente(ccpf[1], cnome[1], cemail[1], ctelefone[1], cdata_nascimento[1], cnacionalidade[1], 
+            result = crud.criar_cliente(ccpf[1], cnome[1], cemail[1], ctelefone[1], cdata_nascimento[1], cnacionalidade[1], 
                         cestado_civil[1], crenda_mensal[1], clogradouro[1], cbairro[1], ccidade[1], 
                             cestado[1], ccep[1])
-            print("Cliente criado!")
+            print(result)
 
         case 2:
             
@@ -156,9 +156,9 @@ while True:
                         #crud.atualizar_cliente(cpf, cep = campo_alterado)
                         cep = campo_alterado
                     case 13:
-                        crud.atualizar_cliente(cpf, nome, email, telefone, data_nascimento, nacionalidade, estado_civil, 
+                        result = crud.atualizar_cliente(cpf, nome, email, telefone, data_nascimento, nacionalidade, estado_civil, 
                             renda_mensal, logradouro, bairro, cidade, estado, cep)
-                        print("Cliente atualizado!")
+                        print(result)
                         break
                     case _:
                         print("Opção inválida.")
