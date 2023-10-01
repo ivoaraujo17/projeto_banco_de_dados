@@ -2,13 +2,14 @@ from crud import Crud
 
 crud = Crud()
 while True:
-    resposta = int(input("Escolha uma operação para realizar:\n"
+    resposta = int(input("\nEscolha uma operação para realizar:\n"
                     '(1) criar um cliente;\n'
                     '(2) atualizar um cliente;\n'
                     '(3) listar todos os clientes;\n'
                     '(4) pesquisar cliente por nome;\n'
                     '(5) exibir cliente por cpf;\n'
-                    '(6) deletar um cliente;\n'))
+                    '(6) deletar um cliente;\n'
+                    '(7) sair do programa\n'))
 
     match resposta:  
         case 1:
@@ -104,7 +105,7 @@ while True:
                 "10- cidade\n"
                 "11- estado\n"
                 "12- cep\n"
-                "13- digite para sair\n"))
+                "13- commitar e sair\n"))
                 match campo:
                     case 1:
                         campo_alterado = input("Digite o novo nome:")
@@ -155,17 +156,20 @@ while True:
                         #crud.atualizar_cliente(cpf, cep = campo_alterado)
                         cep = campo_alterado
                     case 13:
+                        crud.atualizar_cliente(cpf, nome, email, telefone, data_nascimento, nacionalidade, estado_civil, 
+                            renda_mensal, logradouro, bairro, cidade, estado, cep)
+                        print("Cliente atualizado!")
                         break
                     case _:
                         print("Opção inválida.")
                         
-                continuar_atualizar = input("Deseja alterar outro campo? (s/n)")
+                """continuar_atualizar = input("Deseja alterar outro campo? (s/n)")
                 #Como está sendo alterado um campo por vez, esse break é utilizado quando não se deseja atualizar nenhum outro campo
                 if continuar_atualizar.lower() != 's':
                     crud.atualizar_cliente(cpf, nome, email, telefone, data_nascimento, nacionalidade, estado_civil, 
                             renda_mensal, logradouro, bairro, cidade, estado, cep)
                     print("Cliente atualizado!")
-                    break
+                    break"""
                     
         case 3:
             print(crud.listar_todos_clientes())
@@ -183,13 +187,13 @@ while True:
             crud.deletar_cliente(delete_cpf)
             print("Cliente deletado!")
 
+        case 7:
+            print("Programa terminado.")
+            break
+
         case _:
             print("insira uma opção valida")
 
-    continar_main = input("\nDeseja fazer mais uma operação? (s/n)\n")
-    if continar_main.lower() != 's':
-        print("Programa terminado.")
-        break
 
 # Jorge, 79292297007
 # Milton, 32922855007
