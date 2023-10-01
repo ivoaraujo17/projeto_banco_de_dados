@@ -2,7 +2,8 @@ from crud import Crud
 
 crud = Crud()
 while True:
-    print("\nMenu de operações:\n"
+    print("_________________________________________________________________\n")
+    print("Menu de operações:\n"
                     '(1) criar um cliente;\n'
                     '(2) atualizar um cliente;\n'
                     '(3) listar todos os clientes;\n'
@@ -14,7 +15,7 @@ while True:
 
     match resposta:  
         case 1:
-            
+            print("_________________________________________________________________\n")
             ccpf = crud.validar_cpf(input("Insira o cpf: "))
             while not ccpf[0]:
                 ccpf = crud.validar_cpf(input("Cpf inválido. Insira o cpf: "))
@@ -74,7 +75,7 @@ while True:
             print(result)
 
         case 2:
-            
+            print("_________________________________________________________________\n")
             procurando_cpf = crud.pesquisar_por_cpf(input("\nInsira o cpf de quem será alterado: "))
             while not procurando_cpf[0]:
                 procurando_cpf = crud.pesquisar_por_cpf(input("CPF invalido. Insira o cpf de quem será alterado: "))
@@ -93,7 +94,7 @@ while True:
             estado= [True, ""]
             cep= [True, ""]
             while True:
-                print("\nMenu de operações:\n"
+                print("Menu de operações:\n"
                 "1- nome\n"
                 "2- email\n"
                 "3- telefone\n"
@@ -106,7 +107,8 @@ while True:
                 "10- cidade\n"
                 "11- estado\n"
                 "12- cep\n"
-                "13- salvar alterações e sair\n")
+                "13- commitar alterações e sair\n"
+                "14 - cancelar as alterações e sair\n")
                 campo = int(input("Digite o número correspondente ao campo que deve ser atualizado: "))
                 match campo:
                     case 1:
@@ -114,66 +116,81 @@ while True:
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_nome(input("Nome inválido. Insira novamente o nome: "))
                         nome = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 2:
                         campo_alterado = crud.validar_email(input("Insira o novo email: "))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_email(input("Email inválido. Insira novamente o email: "))
                         email = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 3:
                         campo_alterado = crud.validar_email(input("Digite o novo telefone:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_telefone(input("Telefone inválido. Insira novamente o telefone: "))
                         telefone = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 4:
                         campo_alterado = crud.validar_data_nascimento(input("Digite a nova data de nascimento:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_data_nascimento(input("Data inválida. Insira novamente a data de nascimento: "))
                         data_nascimento = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 5:
                         campo_alterado = crud.validar_nacionalidade(input("Digite a nova nacionalidade:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_nacionalidade(input("Nacionalidade inválida. Insira novamente a nacionalidade: "))
                         nacionalidade = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 6:
                         campo_alterado = crud.validar_estado_civil(input("Digite o novo estado civil:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_estado_civil(input("Estado civil inválido. Insira novamente o estado civil: "))
                         estado_civil = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 7:
                         campo_alterado = crud.validar_renda_mensal(input("Digite a nova renda mensal:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_renda_mensal(input("Renda mensal inválida. Insira novamente a renda mensal: "))
                         renda_mensal = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 8:
                         campo_alterado = crud.validar_logradouro(input("Digite o novo logradouro:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_logradouro(input("Logradouro inválido. Insira novamente o logradouro: "))
                         logradouro = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 9:
                         campo_alterado = crud.validar_bairro(input("Digite o novo bairro:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_bairro(input("Bairro inválido. Insira novamente o bairro: "))
                         bairro = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 10:
                         campo_alterado = crud.validar_cidade(input("Digite a nova cidade:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_cidade(input("Cidade inválida. Insira novamente a cidade: "))
                         cidade = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 11:
                         campo_alterado = crud.validar_estado(input("Digite o novo estado:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_estado(input("Estado inválido. Insira novamente o estado: "))
                         estado = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 12:
                         campo_alterado = crud.validar_cep(input("Digite o novo cep:"))
                         while not campo_alterado[0]:
                             campo_alterado = crud.validar_cep(input("CEP inválido. Insira novamente o cep: "))
                         cep = campo_alterado
+                        print("Alteração salva, aguardando commit\n")
                     case 13:
                         result = crud.atualizar_cliente(cpf, nome[1], email[1], telefone[1], data_nascimento[1], nacionalidade[1], 
                                                         estado_civil[1], renda_mensal[1], logradouro[1], bairro[1], cidade[1], 
                                                         estado[1], cep[1])
                         print(result[1])
+                        break
+                    case 14:
+                        print("Atualização cancelada.")
                         break
                     case _:
                         print("Opção inválida.")
@@ -187,15 +204,31 @@ while True:
                     break"""
                     
         case 3:
-            print(crud.listar_todos_clientes()[1])
+            #print(crud.listar_todos_clientes()[1])
+            print("_________________________________________________________________\n")
+            print("cpf | nome")
+            list_show = crud.listar_todos_clientes()[1]
+            for i in range(len(list_show)):
+                print(list_show[i][0], list_show[i][1])
 
         case 4:
+            print("_________________________________________________________________\n")
             pesquisa_nome = input("Insira o nome para ser pesquisado: ")
-            print(crud.pesquisar_por_nome(pesquisa_nome)[1])
+            #print(crud.pesquisar_por_nome(pesquisa_nome)[1])
+            print("cpf | nome")
+            list_show = crud.pesquisar_por_nome(pesquisa_nome)[1]
+            for i in range(len(list_show)):
+                print(list_show[i][0], list_show[i][1])
 
         case 5:
+            print("_________________________________________________________________\n")
             exibir_cpf = input("Insira o cpf para ser ser exibido: ")
-            print(crud.pesquisar_por_cpf(exibir_cpf)[1])
+            #print(crud.pesquisar_por_cpf(exibir_cpf)[1])
+            list_show = crud.pesquisar_por_cpf(exibir_cpf)[1]
+            string_atributos = ["cpf", "nome", "email", "telefone", "data_nascimento", "nacionalidade", "estado_civil", 
+                                "renda_mensal", "logradouro", "bairro", 'cidade', 'estado', 'cep', 'data de entrada', 'ultima atualização']
+            for i in range(len(list_show[0])):
+                print(string_atributos[i],":", list_show[0][i])   
 
         case 6:
             delete_cpf = input("Insira o cpf do cliente a ser deletado: ")        
@@ -204,6 +237,7 @@ while True:
 
         case 7:
             print("Programa finalizado.")
+            print("_________________________________________________________________\n")
             break
 
         case _:
