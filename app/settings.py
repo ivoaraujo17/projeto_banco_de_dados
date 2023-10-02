@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -129,9 +129,9 @@ MEDIA_ROOT = [
     BASE_DIR / "media",
 ]
 
-LOGIN_REDIRECT_URL = 'homepage:homepage'
+LOGIN_REDIRECT_URL = 'cliente:cadastro_cliente'
 LOGIN_URL = 'cliente:login'
-LOGOUT_REDIRECT_URL = 'homepage:logout'
+LOGOUT_REDIRECT_URL = 'homepage:homepage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
