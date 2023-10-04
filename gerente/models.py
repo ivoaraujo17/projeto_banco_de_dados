@@ -8,7 +8,7 @@ estados = [('AC', 'AC'), ('AL', 'AL'), ('AP', 'AP'), ('AM', 'AM'), ('BA', 'BA'),
 ]
 
 # Create your models here.
-class Gerente(models.Models):
+class Gerente(models.Model):
     cpf = models.CharField(max_length=11, unique=True)
     nome = models.CharField(max_length=50)
     email = models.EmailField(unique = True)
@@ -18,7 +18,7 @@ class Gerente(models.Models):
     logradouro = models.CharField(max_length=200)
     bairro = models.CharField(max_length=50)
     cidade = models.CharField(max_length=50)
-    estado = models.CharField(choices=estados)
+    estado = models.CharField(choices=estados, max_length=2)
 
     def __str__(self):
         return f'{self.email}'
