@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="container justify-content-center w-25 bg-blue-200 rounded-lg my-40 py-7">
     <form method="post">
         {% csrf_token %}
         {% for field in form %}
@@ -26,6 +27,9 @@
                 {% endfor %}
             </div>
         {% endfor %}
-        <button class="bg-green-500" type="submit">Criar Conta</button>
+        <div class="text-center">
+            <button class= "bg-green-300 p-2 my-4 rounded-lg " type="submit">Criar Conta</button>
+          </div>
     </form>
+</div>
 {% endblock %}
