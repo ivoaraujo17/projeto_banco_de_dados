@@ -12,7 +12,7 @@ def pesquisar_usando_nome(cursor, nome_desejado):
     if nome_desejado == "" or not type(nome_desejado) == str:
         return [False, "Nome inválido"]
     try:
-        cursor.execute(f""" SELECT cpf, nome FROM private.cliente WHERE nome LIKE '%{nome_desejado}%' """)
+        cursor.execute(f""" SELECT cpf, nome FROM private.cliente WHERE UPPER(nome) LIKE '%{nome_desejado}%' """)
         resultado = cursor.fetchall()
         if len(resultado) != 0:
             return [True, resultado]

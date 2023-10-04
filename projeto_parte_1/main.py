@@ -213,12 +213,15 @@ while True:
 
         case 4:
             print("_________________________________________________________________\n")
-            pesquisa_nome = input("Insira o nome para ser pesquisado: ")
+            pesquisa_nome = input("Insira o nome para ser pesquisado: ").upper()
             #print(crud.pesquisar_por_nome(pesquisa_nome)[1])
             print("cpf | nome")
-            list_show = crud.pesquisar_por_nome(pesquisa_nome)[1]
-            for i in range(len(list_show)):
-                print(list_show[i][0], list_show[i][1])
+            list_show = crud.pesquisar_por_nome(pesquisa_nome)
+            if list_show[0]:
+                for i in list_show[1]:
+                    print(i[0], i[1])
+            else:
+                print(list_show[1])
 
         case 5:
             print("_________________________________________________________________\n")
@@ -247,4 +250,6 @@ while True:
 # Jorge, 79292297007
 # Milton, 32922855007
 # Quirino, 19149311069
-# Andre, 83754444050
+# Andrei, 83754444050
+# cpf : 87382775062
+# cpf : 51600414001
