@@ -17,7 +17,7 @@ def criar_usuario(request):
             password = form.cleaned_data['password']
             user = User.objects.create_user(username=username, password=password, email=username)
             messages.success(request, 'Usuário criado com sucesso!')
-            return redirect('homepage:homepage')
+            return redirect('cliente:login')
     else:
         form = CriarContaForm()
 
@@ -31,7 +31,7 @@ def criar_cliente(request):
         cliente_existe = cursor.fetchone()[0]
 
     if cliente_existe:
-        return redirect('homepage:homepage')
+        return redirect('conta_bancaria:pagina_inicial')
 
     if request.method == 'POST':
         form = CriarClienteForm(request.POST)
@@ -69,7 +69,7 @@ def criar_cliente(request):
             with connection.cursor() as cursor:
                 cursor.execute(consulta_sql, parametros)
             
-            return redirect('homepage:homepage')
+            return redirect('conta_bancaria:pagina_inicial')
     else:
         form = CriarClienteForm()
     return render(request, 'cadastrar_cliente.html', {'form': form})
