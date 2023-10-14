@@ -47,6 +47,12 @@
             </div>
           </div>
         </div>
+        <!-- botao de trocar de conta -->
+        <div>
+          {% if user.is_authenticated %}
+            <a href="{% url 'conta_bancaria:escolha_tipo_conta' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Trocar de conta</a>
+          {% endif %}
+        </div>
         <div class="flex">
           {% if user.is_authenticated %}
               <p class="text-gray-300">{{ user.email }}</p>
