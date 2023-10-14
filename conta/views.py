@@ -15,7 +15,7 @@ def pagina_inicial(request):
         cpf = cursor.fetchone()[0]
         cursor.execute("SELECT numero FROM conta_conta_bancaria WHERE cliente_id = %s", [cpf])
         contas = cursor.fetchone()
-    if len(contas)  == 1:
+    if contas:
         return redirect('conta_bancaria:minha_conta', numero_conta=contas[0])
     else:
         return redirect('conta_bancaria:escolha_tipo_conta')
@@ -23,17 +23,16 @@ def pagina_inicial(request):
 
 def criar_conta_corrente(request):
     # verifica se o cliente ja tem uma conta corrente
-    cpf = None
     with connection.cursor() as cursor:
         # busca o cpf do cliente logado
         cursor.execute("SELECT cpf FROM cliente_cliente WHERE email = %s", [request.user.email])
         cpf = cursor.fetchone()[0]
         # busca o numero de contas correntes do cliente
         cursor.execute("SELECT numero FROM conta_conta_bancaria WHERE cliente_id = %s AND tipo_conta = 'Corrente'", [cpf])
-        conta_corrente = cursor.fetchone()[0]
+        conta_corrente = cursor.fetchone()
     
     if conta_corrente:
-        return redirect('conta_bancaria:minha_conta', numero_conta=conta_corrente)
+        return redirect('conta_bancaria:minha_conta', numero_conta=conta_corrente[0])
     else:
         # insere a conta no banco de dados
         with connection.cursor() as cursor:
@@ -60,7 +59,6 @@ def criar_conta_corrente(request):
 
 def criar_conta_poupanca(request):
     # verifica se o cliente ja tem uma conta poupança
-    cpf = None
     with connection.cursor() as cursor:
         # busca o cpf do cliente logado
         cursor.execute("SELECT cpf FROM cliente_cliente WHERE email = %s", [request.user.email])
