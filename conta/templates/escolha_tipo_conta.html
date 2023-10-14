@@ -11,8 +11,20 @@
 {% block content %}
 <div>
     <p>escolha sua conta</p>
-    <button>conta salario</button>
-    <button>conta poupança</button>
-    <button>conta corrente</button>
+    <div>
+        <a href="{% url 'conta_bancaria:criar_conta_corrente' %}">
+            <button>conta corrente</button>
+        </a>
     </div>
-{% endblock %}
+    <div>
+        <a href="{% url 'conta_bancaria:criar_conta_salario' %}">
+            <button>conta salario</button>
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'conta_bancaria:criar_conta_poupanca' %}">
+            <button>conta poupança</button>
+        </a>
+    </div>    
+</div>
+{% endblock %}conta salario

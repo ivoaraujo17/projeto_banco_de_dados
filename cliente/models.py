@@ -11,7 +11,7 @@ estados = [('AC', 'AC'), ('AL', 'AL'), ('AP', 'AP'), ('AM', 'AM'), ('BA', 'BA'),
 
 class Cliente(models.Model):
     email = models.EmailField(unique=True)
-    cpf = models.CharField(max_length=11, unique=True)
+    cpf = models.CharField(max_length=11, unique=True, primary_key=True)
     nome = models.CharField(max_length=50)
     telefone = models.CharField(max_length=14)
     data_nascimento = models.DateField()

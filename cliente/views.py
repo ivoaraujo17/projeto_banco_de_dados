@@ -15,9 +15,13 @@ def criar_usuario(request):
         if form.is_valid():
             username = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user = User.objects.create_user(username=username, password=password, email=username)
-            messages.success(request, 'Usuário criado com sucesso!')
-            return redirect('cliente:login')
+            user = User.objects.get(username=username)
+            if user:
+                return render(request, 'criar_conta.html', {'form': form, 'erro': 'Usuário já existe.'})
+            else:
+                user = User.objects.create_user(username=username, password=password, email=username)
+                messages.success(request, 'Usuário criado com sucesso!')
+                return redirect('cliente:login')
     else:
         form = CriarContaForm()
 

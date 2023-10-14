@@ -11,25 +11,28 @@
 <div class="container justify-content-center w-25 bg-blue-200 rounded-lg my-40 py-7">
     <form method="post">
         {% csrf_token %}
-        {% for field in form %}
-            <div class="form-group">
-                {% if field.label == "Usuário" %}
-                    <label for="{{ field.id_for_label }}">Email</label>
-                {% else %}
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {% endif %}
-                {{ field }}
-                {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                {% endif %}
-                {% for error in field.errors %}
-                    <small class="form-text text-danger">{{ error }}</small>
-                {% endfor %}
+        <div class="form-group">
+            <label>Email</label>
+            {{ form.email }}
+            <label>Senha</label>
+            {{ form.password }}
+            <label>Confirmar Senha</label>
+            {{ form.confirm_password }}
+            {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <small class="form-text text-danger">{{ error }}</small>
+            {% endfor %}
+        </div>
+        {% if erro %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ erro }}</strong>
             </div>
-        {% endfor %}
+        {% endif %}
         <div class="text-center">
             <button class= "bg-green-300 p-2 my-4 rounded-lg " type="submit">Criar Conta</button>
-          </div>
+        </div>
     </form>
 </div>
 {% endblock %}
