@@ -5,5 +5,5 @@ from .views import *
 app_name = 'concessao'
 
 urlpatterns = [
-    path('concessao/', concessao, name='concessao'),
+    path('concessao/', solicitar_concessao, name='concessao'),
 ]
