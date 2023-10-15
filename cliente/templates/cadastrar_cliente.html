@@ -8,23 +8,83 @@
 {% endblock %}
 
 {% block content %}
-<div class="container justify-content-center w-25 bg-blue-200 rounded-lg my-40 py-7 px-10">
+<div class="conteiner justify-content-center w-100 bg-purple-200 rounded-lg my-10 py-6 px-10">
     <form method="post">
         {% csrf_token %}
-        {% for field in form %}
-            <div class="form-group">
-                {{ field.label_tag }}
-                {{ field }}
-                {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                {% endif %}
-                {% for error in field.errors %}
-                    <small class="form-text text-danger">{{ error }}</small>
-                {% endfor %}
+        <div class="flex py-3">
+            <div class="w-full mx-4">
+                {{ form.nome.label_tag }}
+                {{ form.nome }}
+                
             </div>
-        {% endfor %}
+            <div class="w-full mx-4">
+                {{ form.cpf.label_tag }}
+                {{ form.cpf }}
+            </div>
+            <div class="w-full mx-4">
+                {{ form.telefone.label_tag }}
+                {{ form.telefone }}
+            </div>
+
+        </div>
+        <div class="flex py-3">
+            <div class="w-full mx-4">
+                {{ form.renda_mensal.label_tag }}
+                {{ form.renda_mensal }}
+                
+            </div>
+            <div class="w-full mx-4">
+                {{ form.data_nascimento.label_tag }}
+                {{ form.data_nascimento }}
+                
+            </div>
+            <div class="w-full mx-4">
+                {{ form.nacionalidade.label_tag }}
+                {{ form.nacionalidade }}
+            </div>
+            <div class="w-full mx-4">
+                {{ form.estado_civil.label_tag }}
+                {{ form.estado_civil }}
+            </div>
+
+        </div>
+        <div class="flex py-3">
+            <div class="w-5/12 mx-4">
+                {{ form.logradouro.label_tag }}
+                {{ form.logradouro }}
+            </div>
+            <div class="w-1/12 mx-4">
+                {{ form.numero.label_tag }}
+                {{ form.numero }}
+            </div>
+            <div class="w-5/12 mx-4">
+                {{ form.complemento.label_tag }}
+                {{ form.complemento }}
+                
+            </div>
+
+        </div>
+        <div class="flex py-3">
+            <div class="w-3/12 mx-4">
+                {{ form.bairro.label_tag }}
+                {{ form.bairro }}
+            </div>
+            <div class="w-3/12 mx-4">
+                {{ form.cidade.label_tag }}
+                {{ form.cidade }}
+            </div>
+            <div class="w-1/12 mx-4">
+                {{ form.estado.label_tag }}
+                {{ form.estado }}
+            </div>
+            <div class="w-3/12 mx-4">
+                {{ form.cep.label_tag }}
+                {{ form.cep }}
+            </div>
+    
+        </div>
         <div class="text-center">
-            <button class= "bg-green-300 p-2 my-4 rounded-lg " type="submit">Cadastrar</button>
+            <button class= "bg-yellow-200 p-2 my-4 rounded-lg " type="submit">Cadastrar</button>
           </div>
     </form>
 </div>

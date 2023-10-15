@@ -10,21 +10,22 @@
 
 {% block content %}
 <div>
-    <p>escolha sua conta</p>
-    <div>
-        <a href="{% url 'conta_bancaria:criar_conta_corrente' %}">
-            <button>conta corrente</button>
+    <h1 class="flex justify-content-center h1 py-3">Escolha sua conta</h1>
+    <div class="flex justify-content-center ">
+        <div>
+        <a class="w-4/12 mx-4" href="{% url 'conta_bancaria:criar_conta_corrente' %}">
+            <button class="bg-purple-200 p-7 py-14 my-4 "><h1 class="bi bi-coin display-2"></h1> conta corrente</button>
         </a>
     </div>
     <div>
-        <a href="{% url 'conta_bancaria:criar_conta_salario' %}">
-            <button>conta salario</button>
+        <a class="w-4/12 mx-4" href="{% url 'conta_bancaria:criar_conta_salario' %}">
+            <button class="bg-purple-200 p-7  py-14 my-4  "><h1 class="bi bi-piggy-bank display-2"></h1> conta salario</button>
         </a>
     </div>
     <div>
-        <a href="{% url 'conta_bancaria:criar_conta_poupanca' %}">
-            <button>conta poupança</button>
+        <a class="w-4/12 mx-4" href="{% url 'conta_bancaria:criar_conta_poupanca' %}">
+            <button class="bg-purple-200 p-7  py-14 my-4"> <h1 class="bi bi-cash-coin display-2"></h1> conta poupança</button>
         </a>
-    </div>    
+    </div>  
 </div>
 {% endblock %}conta salario

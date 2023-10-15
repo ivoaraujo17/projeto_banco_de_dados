@@ -9,7 +9,7 @@ estados = [('AC', 'AC'), ('AL', 'AL'), ('AP', 'AP'), ('AM', 'AM'), ('BA', 'BA'),
 
 # Create your models here.
 class Gerente(models.Model):
-    cpf = models.CharField(max_length=11, unique=True)
+    cpf = models.CharField(max_length=11, unique=True, primary_key=True)
     nome = models.CharField(max_length=50)
     email = models.EmailField(unique = True)
     telefone = models.CharField(max_length=14)

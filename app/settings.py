@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cliente',
     'gerente',
     'conta',
+    'produto',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,8 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'homepage/templates', 'gerente/templates', 'conta/templates'],
+        'DIRS': ['templates', 'homepage/templates', 'gerente/templates', 'conta/templates', 
+                 'produto/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

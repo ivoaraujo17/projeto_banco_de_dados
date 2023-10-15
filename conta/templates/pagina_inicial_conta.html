@@ -9,15 +9,37 @@
 {% endblock %}
 
 {% block content %}
+<div class="flex justify-content-center">
+<div class="flex row py-3 ">
+    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-10 ml-10">numero: {{ numero }}</p>
+    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-10 ml-10">agencia: {{ agencia }}</p>
+</div>
+<div class="flex row py-3">
+    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-10 ml-10">saldo: {{ saldo }}</p>
+    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-10 ml-10">limite_especial: {{ limite_especial }}</p>
+</div>
+</div>
+
+
 <div>
-    <p>lista dos produtos disponiveis e contratados</p>
-    <p>numero: {{ numero }}</p>
-    <p>agencia: {{ agencia }}</p>
-    <p>tipo: {{ tipo_conta }}</p>
-    <p>saldo: {{ saldo }}</p>
-    <p>limite_especial: {{ limite_especial }}</p>
-    <p>cliente: {{ cliente }}</p>
-    <p>gerente: {{ gerente }}</p>
-    
+    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-80 ml-80">tipo: {{ tipo_conta }}</p>
+    <p class="flex justify-content-center h1"> selecione o produto bancario </p>
+    <div class="flex justify-content-center ">
+    <div>
+        <a href="{% url 'produto:emprestimo' %}">
+            <button class="bg-purple-200 p-7 py-14 m-4 "><h1 class="bi bi-wallet2 display-2"></h1>emprestimo</button>
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'produto:financiamento' %}">
+            <button class="bg-purple-200 p-7 py-14 m-4 "><h1 class="bi bi-building display-2"></h1>financiamento</button>
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'produto:consorcio' %}">
+            <button class="bg-purple-200 p-7 py-14 m-4 "><h1 class="bi bi-key display-2"></h1>consorcio</button>
+        </a>
+    </div>
+    </div> 
 </div>
 {% endblock %}

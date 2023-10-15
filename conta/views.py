@@ -158,5 +158,4 @@ def minha_conta(request, numero_conta):
                     'cliente': conta[5],
                     'gerente': conta[6],
                     }
-                    )
-    
+                    )   
