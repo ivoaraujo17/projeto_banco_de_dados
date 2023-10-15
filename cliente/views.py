@@ -23,7 +23,8 @@ def criar_usuario(request):
                 return redirect('cliente:login')
             else:
                 return render(request, 'criar_conta.html', {'form': form, 'erro': 'Usuário já existe.'})
-                
+        else:
+            return render(request, 'criar_conta.html', {'form': form})     
     else:
         form = CriarContaForm()
 

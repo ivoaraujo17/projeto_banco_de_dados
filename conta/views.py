@@ -13,10 +13,16 @@ def pagina_inicial(request):
         # busca o cpf do cliente logado
         cursor.execute("SELECT cpf FROM cliente_cliente WHERE email = %s", [request.user.email])
         cpf = cursor.fetchone()[0]
+        print(cpf)
         cursor.execute("SELECT numero FROM conta_conta_bancaria WHERE cliente_id = %s", [cpf])
         contas = cursor.fetchone()
+        print(contas)
     if contas:
-        return redirect('conta_bancaria:minha_conta', numero_conta=contas[0])
+        print(contas)
+        if len(contas) == 1:
+            return redirect('conta_bancaria:minha_conta', numero_conta=contas[0])
+        else:
+            return redirect('conta_bancaria:escolha_tipo_conta')
     else:
         return redirect('conta_bancaria:escolha_tipo_conta')
 

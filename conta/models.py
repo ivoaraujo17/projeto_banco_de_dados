@@ -12,4 +12,4 @@ class Conta_bancaria(models.Model):
     limite_especial = models.FloatField()
 
     def __str__(self):
-        return f'Conta: {self.numero} | Tipo: {self.tipo_conta} | Cliente: {self.id_cliente}'
+        return f'Conta: {self.numero} | Tipo: {self.tipo_conta} | Cliente: {self.cliente}'

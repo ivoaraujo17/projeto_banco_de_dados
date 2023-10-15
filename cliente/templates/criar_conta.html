@@ -18,11 +18,10 @@
             {{ form.password }}
             <label>Confirmar Senha</label>
             {{ form.confirm_password }}
-            {% if field.help_text %}
-                <small class="form-text text-muted">{{ field.help_text }}</small>
-            {% endif %}
-            {% for error in field.errors %}
-                <small class="form-text text-danger">{{ error }}</small>
+            
+            {% for error in form.errors %}
+                
+                <small class="form-text text-danger">o valor preenchido no campo {{ error }} é invalido</small>
             {% endfor %}
         </div>
         {% if erro %}
