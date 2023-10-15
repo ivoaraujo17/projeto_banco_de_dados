@@ -9,37 +9,64 @@
 {% endblock %}
 
 {% block content %}
-<div class="flex justify-content-center">
-<div class="flex row py-3 ">
-    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-10 ml-10">numero: {{ numero }}</p>
-    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-10 ml-10">agencia: {{ agencia }}</p>
-</div>
-<div class="flex row py-3">
-    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-10 ml-10">saldo: {{ saldo }}</p>
-    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-10 ml-10">limite_especial: {{ limite_especial }}</p>
-</div>
+<div class="px-4 py-2">
+    <div class="py-3 pt-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded">
+        <div class="flex">
+            <div class="w-full lg:flex">
+                <p class="px-2 font-medium text-[22px]">Número</p>
+                <p class="px-2 font-medium text-[22px]">{{ numero }}</p>
+            </div>
+            <div class="w-full lg:flex">
+                <p class="px-2 font-medium text-[22px]">Agencia</p>
+                <p class="px-2 font-medium text-[22px]">{{ agencia }}</p>
+            </div>
+            <div class="w-full lg:flex">
+                <p class="px-2 font-medium text-[22px]">Saldo</p>
+                <p class="px-2 font-medium text-[22px]">{{ saldo }}</p>
+            </div>
+            <div class="w-full lg:flex">
+                <p class="px-2 font-medium text-[22px]">Limite Especial</p>
+                <p class="px-2 font-medium text-[22px]">{{ limite_especial }}</p>
+            </div>
+            <div class="w-full lg:flex">
+                <p class="px-2 font-medium text-[22px]">Tipo</p>
+                <p class="px-2 font-medium text-[22px]">{{ tipo_conta }}</p>
+            </div>
+        </div>
+    </div>
+    
 </div>
 
 
-<div>
-    <p class="flex justify-content-center h3 bg-gray-300 rounded-lg me-80 ml-80">tipo: {{ tipo_conta }}</p>
-    <p class="flex justify-content-center h1"> selecione o produto bancario </p>
-    <div class="flex justify-content-center ">
-    <div>
-        <a href="{% url 'produto:emprestimo' %}">
-            <button class="bg-purple-200 p-7 py-14 m-4 "><h1 class="bi bi-wallet2 display-2"></h1>emprestimo</button>
-        </a>
+<div class="px-4 py-2">
+    <div class="py-3 pt-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded">
+        <p class="flex justify-content-center font-medium text-[35px]">Selecione o Produto Bancario</p>
+        <div class="md:flex justify-center">
+            <div class="flex justify-center">
+                <a href="{% url 'produto:emprestimo' %}">
+                    <button class="shadow-lg rounded bg-purple-950 p-7 m-4 " style="color:aliceblue">
+                        <h1 class="bi w-full px-1 py-3 bi-wallet2 display-2"></h1>
+                        <h1 class="w-full">emprestimo</h1> 
+                    </button>
+                </a>
+            </div>
+            <div class="flex justify-center">
+                <a href="{% url 'produto:financiamento' %}">
+                    <button class="shadow-lg rounded bg-purple-950 p-7 m-4 " style="color:aliceblue">
+                        <h1 class="bi w-full px-1 py-3 bi-building display-2"></h1>
+                        <h1 class="w-full">financiamento</h1>
+                    </button>
+                </a>
+            </div>
+            <div class="flex justify-center">
+                <a href="{% url 'produto:consorcio' %}">
+                    <button class="shadow-lg rounded bg-purple-950 p-7 m-4 " style="color:aliceblue">
+                        <h1 class="bi w-full px-1 py-3 bi-key display-2"></h1>
+                        <h1 class="w-full">consorcio</h1>
+                    </button>
+                </a>
+            </div>
+        </div>
     </div>
-    <div>
-        <a href="{% url 'produto:financiamento' %}">
-            <button class="bg-purple-200 p-7 py-14 m-4 "><h1 class="bi bi-building display-2"></h1>financiamento</button>
-        </a>
-    </div>
-    <div>
-        <a href="{% url 'produto:consorcio' %}">
-            <button class="bg-purple-200 p-7 py-14 m-4 "><h1 class="bi bi-key display-2"></h1>consorcio</button>
-        </a>
-    </div>
-    </div> 
 </div>
 {% endblock %}
