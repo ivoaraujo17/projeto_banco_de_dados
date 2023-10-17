@@ -13,10 +13,9 @@ def pagina_inicial(request):
         # busca o cpf do cliente logado
         cursor.execute("SELECT cpf FROM cliente_cliente WHERE email = %s", [request.user.email])
         cpf = cursor.fetchone()[0]
-        print(cpf)
         cursor.execute("SELECT numero FROM conta_conta_bancaria WHERE cliente_id = %s", [cpf])
-        contas = cursor.fetchone()
-        print(contas)
+        contas = cursor.fetchall()
+
     if contas:
         print(contas)
         if len(contas) == 1:
@@ -44,15 +43,18 @@ def criar_conta_corrente(request):
         with connection.cursor() as cursor:
             # busca um gerente do mesmo estado do cliente, caos não exista, busca um gerente de outro estado
             cursor.execute("SELECT cpf FROM gerente_gerente WHERE estado = (SELECT estado FROM cliente_cliente WHERE cpf = %s)", [cpf])
-            gerente = cursor.fetchone()[0]
+            gerente = cursor.fetchone()
             if gerente == None:
                 cursor.execute("SELECT cpf FROM gerente_gerente")
                 # busca a quantidade de gerentes
-                qtd_gerentes = len(cursor.fetchall())
+                gerentes = cursor.fetchall()
+                qtd_gerentes = len(gerentes)
                 # gera um numero aleatorio entre 0 e a quantidade de gerentes
                 import random
                 n = random.randint(0, qtd_gerentes -1)
-                gerente = cursor.fetchone()[n]
+                gerente = gerentes[n][0]
+            else:
+                gerente = gerente[0]
 
             cursor.execute("INSERT INTO conta_conta_bancaria (cliente_id, tipo_conta, agencia, gerente_id, saldo, limite_especial) VALUES (%s, %s, %s, %s, %s, %s)", 
                             [cpf, 'Corrente', 1001, gerente, 0, 0])
@@ -80,15 +82,18 @@ def criar_conta_poupanca(request):
         with connection.cursor() as cursor:
             # busca um gerente do mesmo estado do cliente, caos não exista, busca um gerente de outro estado
             cursor.execute("SELECT cpf FROM gerente_gerente WHERE estado = (SELECT estado FROM cliente_cliente WHERE cpf = %s)", [cpf])
-            gerente = cursor.fetchone()[0]
+            gerente = cursor.fetchone()
             if gerente == None:
                 cursor.execute("SELECT cpf FROM gerente_gerente")
                 # busca a quantidade de gerentes
-                qtd_gerentes = len(cursor.fetchall())
+                gerentes = cursor.fetchall()
+                qtd_gerentes = len(gerentes)
                 # gera um numero aleatorio entre 0 e a quantidade de gerentes
                 import random
                 n = random.randint(0, qtd_gerentes -1)
-                gerente = cursor.fetchone()[n]
+                gerente = gerentes[n][0]
+            else:
+                gerente = gerente[0]
 
 
             cursor.execute("""INSERT INTO conta_conta_bancaria 
@@ -119,15 +124,18 @@ def criar_conta_salario(request):
         with connection.cursor() as cursor:
             # busca um gerente do mesmo estado do cliente, caos não exista, busca um gerente de outro estado
             cursor.execute("SELECT cpf FROM gerente_gerente WHERE estado = (SELECT estado FROM cliente_cliente WHERE cpf = %s)", [cpf])
-            gerente = cursor.fetchone()[0]
+            gerente = cursor.fetchone()
             if gerente == None:
                 cursor.execute("SELECT cpf FROM gerente_gerente")
                 # busca a quantidade de gerentes
-                qtd_gerentes = len(cursor.fetchall())
+                gerentes = cursor.fetchall()
+                qtd_gerentes = len(gerentes)
                 # gera um numero aleatorio entre 0 e a quantidade de gerentes
                 import random
                 n = random.randint(0, qtd_gerentes -1)
-                gerente = cursor.fetchone()[n]
+                gerente = gerentes[n][0]
+            else:
+                gerente = gerente[0]
 
 
             cursor.execute("""INSERT INTO conta_conta_bancaria 

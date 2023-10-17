@@ -6,6 +6,8 @@ from django.utils.datetime_safe import datetime
 
 # Create your views here.
 def homepage(request):
+    if request.user.is_authenticated:
+        return redirect('conta_bancaria:pagina_inicial')
     return render(request, 'homepage.html')
 
 
