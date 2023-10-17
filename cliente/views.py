@@ -27,8 +27,7 @@ def criar_usuario(request):
             return render(request, 'criar_conta.html', {'form': form})     
     else:
         form = CriarContaForm()
-
-    return render(request, 'criar_conta.html', {'form': form})
+        return render(request, 'criar_conta.html', {'form': form})
 
 
 def criar_cliente(request):
