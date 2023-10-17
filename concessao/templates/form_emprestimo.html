@@ -61,12 +61,21 @@
         else if (qtd_parcelas_value > 36){
             taxa_juros_value = 12;
         }
+        /*
+        if (data_primeiro_vencimento_value == 45){
+            taxa_juros_value = taxa_juros_value + 1;
+        }
+        else if (data_primeiro_vencimento_value == 60){
+            taxa_juros_value = taxa_juros_value + 2;
+        }*/
 
         const valor_juros = (valor_contratado_value * taxa_juros_value) / 100;
         const valor_total = parseFloat(valor_contratado_value) + parseFloat(valor_juros);
         const valor_parcela_calculado = valor_total / qtd_parcelas_value;
         valor_parcela.value = valor_parcela_calculado.toFixed(2);
         valor_total_pago.value = valor_total.toFixed(2);
+
+        taxa_juros.value = taxa_juros_value;
     }
 
     calcular();

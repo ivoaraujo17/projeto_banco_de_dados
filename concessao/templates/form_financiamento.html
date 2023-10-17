@@ -77,6 +77,8 @@
         const valor_parcela_calculado = valor_total / qtd_parcelas_value;
         valor_parcela.value = valor_parcela_calculado.toFixed(2);
         valor_total_pago.value = valor_total.toFixed(2);
+
+        taxa_juros.value = taxa_juros_value;
     }
 
     calcular();
