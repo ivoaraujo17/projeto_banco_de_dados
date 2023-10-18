@@ -12,7 +12,11 @@ def pagina_inicial(request):
     with connection.cursor() as cursor:
         # busca o cpf do cliente logado
         cursor.execute("SELECT cpf FROM cliente_cliente WHERE email = %s", [request.user.email])
-        cpf = cursor.fetchone()[0]
+        cpf = cursor.fetchone()
+        if cpf == None:
+            return redirect('cliente:cadastro_cliente')
+        else:
+            cpf = cpf[0]
         cursor.execute("SELECT numero FROM conta_conta_bancaria WHERE cliente_id = %s", [cpf])
         contas = cursor.fetchall()
 

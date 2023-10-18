@@ -5,80 +5,63 @@
 {% endblock %}
 
 {% block head %}    
-<link rel="stylesheet" type="text/css" href="{% static 'css/' %}">
+
 {% endblock %}
 
 {% block content %}
-<div class="px-20 py-2">
-    <div class="py-3 pt-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded">
+<div class="flex px-20 py-4 justify-center">
+    <div class="py-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded" style="width:50%;">
+        <div class="flex">
+            <div class="w-10/12">
+                <h1 class="text-2xl font-bold">Contratar Consorcio</h1>
+            </div>
+            <div class="w-2/12">
+                <a href="{% url 'conta_bancaria:pagina_inicial' %}">
+                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                        Voltar
+                    </button>
+                </a>
+            </div>
+        </div>
         <form method="post">
             {% csrf_token %}
-            <div>   
-                {{form.valor_contratado.label_tag}}
-                {{form.valor_contratado}}
+            <div class="flex pt-5 justify-center">
+                <div class="px-3">
+                    <div>   
+                        {{form.valor_contratado.label_tag}}
+                        {{form.valor_contratado}}
+                    </div>
+                    <div>   
+                        {{form.qtd_parcelas.label_tag}}
+                        {{form.qtd_parcelas}}
+                    </div>
+                    <div>   
+                        {{form.data_primeiro_vencimento.label_tag}}
+                        {{form.data_primeiro_vencimento}}
+                    </div>
+                </div>
+                <div class="px-3">
+                    <div>   
+                        {{form.taxa_juros.label_tag}}
+                        {{form.taxa_juros}}
+                    </div>
+                    <div>   
+                        {{form.valor_parcela.label_tag}}
+                        {{form.valor_parcela}}
+                    </div>
+                    <div>   
+                        {{form.valor_total_pago.label_tag}}
+                        {{form.valor_total_pago}}
+                    </div>
+                </div>
             </div>
-            <div>   
-                {{form.qtd_parcelas.label_tag}}
-                {{form.qtd_parcelas}}
-            </div>
-            <div>   
-                {{form.data_primeiro_vencimento.label_tag}}
-                {{form.data_primeiro_vencimento}}
-            </div>
-            <div>   
-                {{form.taxa_juros.label_tag}}
-                {{form.taxa_juros}}
-            </div>
-            <div>   
-                {{form.valor_parcela.label_tag}}
-                {{form.valor_parcela}}
-            </div>
-            <div>   
-                {{form.valor_total_pago.label_tag}}
-                {{form.valor_total_pago}}
+            <div class="flex justify-center pt-4">
+                <button type="submit" class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                    Solicitar
+                </button>
             </div>
         </form>
-        
     </div>
 </div>
-<script>
-    const valor_contratado = document.getElementById('id_valor_contratado');
-    const qtd_parcelas = document.getElementById('id_qtd_parcelas');
-    const data_primeiro_vencimento = document.getElementById('id_data_primeiro_vencimento');
-    const taxa_juros = document.getElementById('id_taxa_juros');
-    const valor_parcela = document.getElementById('id_valor_parcela');
-    const valor_total_pago = document.getElementById('id_valor_total_pago');
-    taxa_juros.value = 10;
-
-    function calcular(){
-        const valor_contratado_value = valor_contratado.value;
-        const qtd_parcelas_value = qtd_parcelas.value;
-        const data_primeiro_vencimento_value = data_primeiro_vencimento.value;
-        let taxa_juros_value = taxa_juros.value;
-
-        if (qtd_parcelas_value > 36 && qtd_parcelas_value <= 72){
-            taxa_juros_value = 15;
-        }
-        else if (qtd_parcelas_value > 72 && qtd_parcelas_value <= 108){
-            taxa_juros_value = 20;
-        }
-        else if (qtd_parcelas_value == 120){
-            taxa_juros_value = 25;
-        }
-
-        const valor_juros = (valor_contratado_value * taxa_juros_value) / 100;
-        const valor_total = parseFloat(valor_contratado_value) + parseFloat(valor_juros);
-        const valor_parcela_calculado = valor_total / qtd_parcelas_value;
-        valor_parcela.value = valor_parcela_calculado.toFixed(2);
-        valor_total_pago.value = valor_total.toFixed(2);
-
-        taxa_juros.value = taxa_juros_value;
-    }
-
-    calcular();
-    qtd_parcelas.addEventListener('change', calcular);
-    valor_contratado.addEventListener('change', calcular);
-    data_primeiro_vencimento.addEventListener('change', calcular);
-
-</script>
+<script src="{% static 'js/concessao/calculo_produto.js' %}"></script>
 {% endblock %}
