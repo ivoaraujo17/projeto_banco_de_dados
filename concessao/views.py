@@ -13,8 +13,7 @@ def emprestimo(request, numero_conta):
         if form.is_valid():
             valor_contratado = form.cleaned_data['valor_contratado']
             dias_primeiro_vencimento = int(form.cleaned_data['data_primeiro_vencimento'])
-            data_primeiro_vencimento = (timezone.now() + timedelta(days=dias_primeiro_vencimento)).strftime('%d-%m-%Y')
-            print(data_primeiro_vencimento)
+            data_primeiro_vencimento = timezone.now().date() + timedelta(days=dias_primeiro_vencimento)
             qtd_parcelas = form.cleaned_data['qtd_parcelas']
             valor_total_pago = form.cleaned_data['valor_total_pago']
             taxa_juros = form.cleaned_data['taxa_juros']

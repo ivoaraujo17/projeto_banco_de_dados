@@ -13,19 +13,27 @@ def pagina_inicial(request, cpf_gerente):
     nova_lista = []
     for concessao in concessoes:
         conc = list(concessao)
-        print(concessao)
         cpf_cliente = concessao[8]
         with connection.cursor() as cursor:
             cursor.execute(f"""SELECT * FROM cliente_cliente WHERE cpf = {cpf_cliente}""")
             cliente = cursor.fetchone()
-            print(cliente)
         conc.append(cliente)
         numero_conta = concessao[9]
         with connection.cursor() as cursor:
             cursor.execute(f"""SELECT * FROM conta_conta_bancaria WHERE numero = {numero_conta}""")
             conta = cursor.fetchone()
-            print(conta)
         conc.append(conta)
+        
+        # recupera a quantidade de produtos que o cliente tem aprovado
+        with connection.cursor() as cursor:
+            cursor.execute(f"""SELECT nome, count(produto_id)
+                                FROM concessao_concessao 
+                                join produto_produto on produto_id = produto
+                                WHERE status = 'Aprovado' and cliente_id = {cpf_cliente}
+                                group by nome
+                                """)
+            produtos_contratados = cursor.fetchall()
+        conc.append(produtos_contratados)
         nova_lista.append(conc)
     
     return render(request, 'pagina_inicial_gerente.html', {'concessoes': nova_lista})
