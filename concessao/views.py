@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.db import connection
 from django.shortcuts import redirect
 from .forms import EmprestimoForm, FinanciamentoForm, ConsorcioForm
+from django.utils import timezone
+from datetime import timedelta
 
 # Create your views here.
 
@@ -10,7 +12,9 @@ def emprestimo(request, numero_conta):
         form = EmprestimoForm(request.POST)
         if form.is_valid():
             valor_contratado = form.cleaned_data['valor_contratado']
-            data_primeiro_vencimento = form.cleaned_data['data_primeiro_vencimento']
+            dias_primeiro_vencimento = int(form.cleaned_data['data_primeiro_vencimento'])
+            data_primeiro_vencimento = (timezone.now() + timedelta(days=dias_primeiro_vencimento)).strftime('%d-%m-%Y')
+            print(data_primeiro_vencimento)
             qtd_parcelas = form.cleaned_data['qtd_parcelas']
             valor_total_pago = form.cleaned_data['valor_total_pago']
             taxa_juros = form.cleaned_data['taxa_juros']
@@ -24,7 +28,6 @@ def emprestimo(request, numero_conta):
                 cliente_cpf, gerente_cpf = cursor.fetchone()
             
             # insere a concessao no banco de dados
-            print(cliente_cpf, gerente_cpf, numero_conta, valor_contratado, data_primeiro_vencimento, qtd_parcelas, taxa_juros, valor_parcela, valor_total_pago)
             with connection.cursor() as cursor:
                 try:
                     cursor.execute(f"""INSERT INTO concessao_concessao 
@@ -34,7 +37,7 @@ def emprestimo(request, numero_conta):
                                         VALUES ('{cliente_cpf}', '{numero_conta}', '1', '{gerente_cpf}', '{valor_contratado}', 
                                                 '{data_primeiro_vencimento}', '{qtd_parcelas}', '{taxa_juros}', '{valor_parcela}', 
                                                 '{valor_total_pago}', 'Em Analise')""")
-                    return redirect('conta_bancaria:minha_conta', numero_conta=numero_conta)
+                    return redirect('produto:emprestimos_conta', numero_conta=numero_conta)
                 except Exception as e:
                     print(e)
                     return render(request, 'form_emprestimo.html',{'form': form, 'erro': e})

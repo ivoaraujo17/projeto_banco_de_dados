@@ -1,3 +1,54 @@
 from django.shortcuts import render
+from django.db import connection
+from django.shortcuts import redirect
 
 # Create your views here.
+def pagina_inicial(request, cpf_gerente):
+    # recupera todas as concessoes em analise
+    with connection.cursor() as cursor:
+        cursor.execute(f"""SELECT * FROM concessao_concessao WHERE status = 'Em Analise' and gerente_id = {cpf_gerente}""")
+        concessoes = cursor.fetchall()
+    
+    # recupera as informações do cliente e da conta
+    nova_lista = []
+    for concessao in concessoes:
+        conc = list(concessao)
+        print(concessao)
+        cpf_cliente = concessao[8]
+        with connection.cursor() as cursor:
+            cursor.execute(f"""SELECT * FROM cliente_cliente WHERE cpf = {cpf_cliente}""")
+            cliente = cursor.fetchone()
+            print(cliente)
+        conc.append(cliente)
+        numero_conta = concessao[9]
+        with connection.cursor() as cursor:
+            cursor.execute(f"""SELECT * FROM conta_conta_bancaria WHERE numero = {numero_conta}""")
+            conta = cursor.fetchone()
+            print(conta)
+        conc.append(conta)
+        nova_lista.append(conc)
+    
+    return render(request, 'pagina_inicial_gerente.html', {'concessoes': nova_lista})
+
+
+def aprovar_concessao(request, concessao_id, decisao):
+    # altera o status da concessao para aprovado
+    if decisao == 1:
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(f"""UPDATE concessao_concessao SET status = 'Aprovado' WHERE concessao = {concessao_id}""")
+                cursor.execute(f"""SELECT * FROM concessao_concessao WHERE concessao = {concessao_id}""")
+                concessao = cursor.fetchone()
+                numero_conta = concessao[9]
+                valor = concessao[1]
+                cursor.execute(f"""UPDATE conta_conta_bancaria SET saldo = saldo + {valor} WHERE numero = {numero_conta}""")
+        except:
+            return redirect('gerente:pagina_inicial', cpf_gerente=concessao[10], error='Erro ao aprovar concessão')
+        else:
+            return redirect('gerente:pagina_inicial', cpf_gerente=concessao[10])
+    else:
+        with connection.cursor() as cursor:
+            cursor.execute(f"""UPDATE concessao_concessao SET status = 'Reprovado' WHERE concessao = {concessao_id}""")
+            cursor.execute(f"""SELECT gerente_id FROM concessao_concessao WHERE concessao = {concessao_id}""")
+            concessao = cursor.fetchone()
+            return redirect('gerente:pagina_inicial', cpf_gerente=concessao[0])

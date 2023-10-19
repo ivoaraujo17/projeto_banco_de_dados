@@ -8,7 +8,7 @@ class Concessao(models.Model):
     produto = models.ForeignKey('produto.Produto', related_name='produtos', on_delete=models.PROTECT, to_field='produto')
     gerente = models.ForeignKey('gerente.Gerente', related_name='gerente', on_delete=models.PROTECT, to_field='cpf')
     valor_contratado = models.FloatField()
-    data_primeiro_vencimento = models.DateField()
+    data_primeiro_vencimento = models.DateField(format('%d/%m/%Y'))
     qtd_parcelas = models.IntegerField()
     juros = models.FloatField()
     valor_parcela = models.FloatField()

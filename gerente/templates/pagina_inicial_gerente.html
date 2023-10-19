@@ -1,7 +1,7 @@
 {% extends 'navbar.html' %}
 {% load static %}
 {% block title %}
-    zenith_capital Emprestimo
+    zenith_capital Gerente
 {% endblock %}
 
 {% block head %}    
@@ -13,27 +13,43 @@
     <div class="py-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded" style="width:75%;">
         <div class="flex">
             <div class="w-8/12">
-                <h1 class="text-2xl font-bold">Emprestimos</h1>
-            </div>
-            <div class="w-4/12">
-                <a href="{% url 'produto:emprestimo' numero_conta=numero %}">
-                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
-                        Novo Emprestimo
-                    </button>
-                </a>
-            </div>
-            <div class="w-2/12">
-                <a href="{% url 'conta_bancaria:minha_conta' numero_conta=numero %}">
-                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
-                        Voltar
-                    </button>
-                </a>
+                <h1 class="text-2xl font-bold">Produtos Para Aprovar</h1>
             </div>
         </div>
         <div class="pt-5">
             <ul class="list-group" id="lista_emprestimos">
-                {% for emprestimo in emprestimos %}
+                {% for emprestimo in concessoes %}
                     <li class="list-group-item">
+                        <div class="flex justify-between">
+                            <div class="w-6/12">
+                                <div class="px-2 py-1">
+                                    <p>Cliente</p>
+                                    <div class="form-control">
+                                        {{ emprestimo.12.2 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Renda</p>
+                                    <div class="form-control">
+                                        {{ emprestimo.12.7 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-6/12">
+                                <div class="px-2 py-1">
+                                    <p>Tipo de Conta</p>
+                                    <div class="form-control">
+                                        {{ emprestimo.13.1 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Saldo</p>
+                                    <div class="form-control">
+                                        {{ emprestimo.13.3 }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="flex justify-between">
                             <div class="w-5/12">
                                 <div class="px-2 py-1">
@@ -75,7 +91,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-2/12 flex items-center">
+                            <div class="w-2/12">
                                 {% if emprestimo.7 == 'Em Analise' %}
                                     <div class="px-2 py-1">
                                         <p>Status</p>
@@ -83,27 +99,47 @@
                                             {{ emprestimo.7 }}
                                         </div>
                                     </div>
+                                    <div class="px-2 py-1 flex justify-center">
+                                        <a href="{% url 'gerente:aprovar_concessao' concessao_id=emprestimo.0 decisao=1 %}">
+                                            <button class="bg-green-600 hover:bg-green-700 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                                                Aprovar
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <div class="px-2 py-1 flex justify-center">
+                                        <a href="{% url 'gerente:aprovar_concessao' concessao_id=emprestimo.0 decisao=0 %}">
+                                            <button class="bg-red-600 hover:bg-red-700 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                                                Reprovar
+                                            </button>
+                                        </a>
+                                    </div>
                                 {% elif emprestimo.7 == 'Aprovado' %}
                                     <div class="px-2 py-1">
                                         <p>Status</p>
-                                        <div class="form-control bg-green-500 text-white">
+                                        <div class="form-control bg-green-500">
                                             {{ emprestimo.7 }}
                                         </div>
                                     </div>
                                 {% elif emprestimo.7 == 'Reprovado' %}
                                     <div class="px-2 py-1">
                                         <p>Status</p>
-                                        <div class="form-control bg-red-600 text-white">
+                                        <div class="form-control bg-red-600">
                                             {{ emprestimo.7 }}
                                         </div>
                                     </div>
-                                {% endif %}
-                                
+                                {% endif %} 
                             </div>
                         </div>
                     </li>
                 {% endfor %}
             </ul>
+            {% if error %}
+                {% for message in messages %}
+                    <div class="text-red-500 font-bold">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>
