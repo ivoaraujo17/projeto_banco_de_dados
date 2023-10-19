@@ -21,7 +21,6 @@ def pagina_inicial(request):
         contas = cursor.fetchall()
 
     if contas:
-        print(contas)
         if len(contas) == 1:
             return redirect('conta_bancaria:minha_conta', numero_conta=contas[0])
         else:

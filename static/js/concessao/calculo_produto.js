@@ -8,7 +8,7 @@ taxa_juros.value = 8;
 
 function calcular(){
     const valor_contratado_value = valor_contratado.value;
-    const qtd_parcelas_value = qtd_parcelas.value;
+    const qtd_parcelas_value = parseInt(qtd_parcelas.value);
     const data_primeiro_vencimento_value = data_primeiro_vencimento.value;
     const taxa_juros_value = taxa_juros.value;
     if (qtd_parcelas_value > 12 && qtd_parcelas_value <= 36){
@@ -18,10 +18,10 @@ function calcular(){
         taxa_juros.value = 12;
     }
     if (data_primeiro_vencimento_value == 45){
-        taxa_juros.value = parseInt(taxa_juros_value) + 0.5;
+        taxa_juros.value = parseFloat(taxa_juros_value) + 0.5;
     }
     else if (data_primeiro_vencimento_value == 60){
-        taxa_juros.value = parseInt(taxa_juros_value) + 1;
+        taxa_juros.value = parseFloat(taxa_juros_value) + 1;
     }
 
     const valor_juros = (valor_contratado_value * taxa_juros_value) / 100;

@@ -37,18 +37,15 @@ class EmprestimoForm(forms.Form):
                                                  widget=forms.Select(attrs={'class': 'form-control'}))
     qtd_parcelas = forms.ChoiceField(label='Quantidade de Parcelas', choices= quantidade_parcelas_emprestimo, 
                                                  widget=forms.Select(attrs={'class': 'form-control'}))
-    valor_total_pago = forms.DecimalField(label='Valor a Pagar', max_digits=10, decimal_places=2,
-                                          widget=forms.TextInput(attrs={'class': 'form-control', 'required':False, 'disabled': True}))
-    taxa_juros = forms.DecimalField(label='Taxa de Juros', max_digits=5, decimal_places=2,
-                                    widget=forms.TextInput(attrs={'class': 'form-control', 'required':False, 'disabled': True}))
-    valor_parcela = forms.DecimalField(label='Valor da Parcela', max_digits=10, decimal_places=2,
-                                       widget=forms.TextInput(attrs={'class': 'form-control',  'required':False, 'disabled': True}))
+    valor_total_pago = forms.DecimalField(label='Valor a Pagar', max_digits=10, decimal_places=2, required=False,
+                                          widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
+    taxa_juros = forms.DecimalField(label='Taxa de Juros', max_digits=5, decimal_places=2, required=False,
+                                    widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
+    valor_parcela = forms.DecimalField(label='Valor da Parcela', max_digits=10, decimal_places=2, required=False,
+                                       widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
     
-    def clean(self):
-        cleaned_data = super().clean()
-        # validações necessárias
-
-        return cleaned_data
+        
+    
     
 class FinanciamentoForm(forms.Form):
     valor_contratado = forms.ChoiceField(label='Valor Contratado', choices= valor_do_financiamento, 
@@ -57,18 +54,13 @@ class FinanciamentoForm(forms.Form):
                                                  widget=forms.Select(attrs={'class': 'form-control'}))
     qtd_parcelas = forms.ChoiceField(label='Quantidade de Parcelas', choices= quantidade_parcelas_financiamento, 
                                                  widget=forms.Select(attrs={'class': 'form-control'}))
-    valor_total_pago = forms.DecimalField(label='Valor a Pagar', max_digits=10, decimal_places=2,
-                                          widget=forms.TextInput(attrs={'class': 'form-control', 'required':False, 'disabled': True}))
-    taxa_juros = forms.DecimalField(label='Taxa de Juros', max_digits=5, decimal_places=2,
-                                    widget=forms.TextInput(attrs={'class': 'form-control', 'required':False, 'disabled': True}))
-    valor_parcela = forms.DecimalField(label='Valor da Parcela', max_digits=10, decimal_places=2,
-                                       widget=forms.TextInput(attrs={'class': 'form-control',  'required':False, 'disabled': True}))
-    
-    def clean(self):
-        cleaned_data = super().clean()
-        # validações necessárias
+    valor_total_pago = forms.DecimalField(label='Valor a Pagar', max_digits=10, decimal_places=2, required=False,
+                                          widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
+    taxa_juros = forms.DecimalField(label='Taxa de Juros', max_digits=5, decimal_places=2, required=False,
+                                    widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
+    valor_parcela = forms.DecimalField(label='Valor da Parcela', max_digits=10, decimal_places=2, required=False,
+                                       widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
 
-        return cleaned_data
     
 class ConsorcioForm(forms.Form):
     valor_contratado = forms.ChoiceField(label='Valor Contratado', choices= valor_do_consorcio, 
@@ -77,16 +69,11 @@ class ConsorcioForm(forms.Form):
                                                  widget=forms.Select(attrs={'class': 'form-control'}))
     qtd_parcelas = forms.ChoiceField(label='Quantidade de Parcelas', choices= quantidade_parcelas_consorcio, 
                                                  widget=forms.Select(attrs={'class': 'form-control'}))
-    valor_total_pago = forms.DecimalField(label='Valor a Pagar', max_digits=10, decimal_places=2,
-                                          widget=forms.TextInput(attrs={'class': 'form-control', 'required':False, 'disabled': True}))
-    taxa_juros = forms.DecimalField(label='Taxa de Juros', max_digits=5, decimal_places=2,
-                                    widget=forms.TextInput(attrs={'class': 'form-control', 'required':False, 'disabled': True}))
-    valor_parcela = forms.DecimalField(label='Valor da Parcela', max_digits=10, decimal_places=2,
-                                       widget=forms.TextInput(attrs={'class': 'form-control',  'required':False, 'disabled': True}))
+    valor_total_pago = forms.DecimalField(label='Valor a Pagar', max_digits=10, decimal_places=2, required=False,
+                                          widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
+    taxa_juros = forms.DecimalField(label='Taxa de Juros', max_digits=5, decimal_places=2, required=False,
+                                    widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
+    valor_parcela = forms.DecimalField(label='Valor da Parcela', max_digits=10, decimal_places=2, required=False,
+                                       widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
     
-    def clean(self):
-        cleaned_data = super().clean()
-        # validações necessárias
-
-        return cleaned_data
 

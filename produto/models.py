@@ -1,7 +1,7 @@
 from django.db import models
 
 class Produto(models.Model):
-    id_produto = models.AutoField(primary_key=True)
+    produto = models.AutoField(primary_key=True)
     nome = models.CharField(choices=[('Emprestimo', 'Emprestimo'), ('Financiamento', 'Financiamento'), ('Concorcio', 'Concorcio')], 
                             max_length=13)
     disponibilidade = models.CharField(choices=[('Corrente, Poupança, Salario','Corrente, Poupança, Salario'), ('Corrente', 'Corrente'),

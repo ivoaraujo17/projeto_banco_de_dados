@@ -1,0 +1,63 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title %}
+    zenith_capital Emprestimo
+{% endblock %}
+
+{% block head %}    
+
+{% endblock %}
+
+{% block content %}
+<div class="flex px-20 py-4 justify-center">
+    <div class="py-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded" style="width:50%;">
+        <div class="flex">
+            <div class="w-8/12">
+                <h1 class="text-2xl font-bold">Emprestimos</h1>
+            </div>
+            <div class="w-4/12">
+                <a href="{% url 'conta_bancaria:minha_conta' numero_conta=numero %}">
+                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                        Novo Emprestimo
+                    </button>
+                </a>
+            </div>
+            <div class="w-2/12">
+                <a href="{% url 'conta_bancaria:minha_conta' numero_conta=numero %}">
+                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                        Voltar
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="pt-5">
+            {% for emprestimo in emprestimos %}
+                <div class="flex justify-between">
+                    <div>
+                        <p>valor contratado: {{ emprestimo.1 }}</p>
+                    </div>
+                    <div>
+                        <p>Primeira Parcela em: {{ emprestimo.2 }}</p>
+                    </div>
+                    <div>
+                        <p>Total de Parcelas {{ emprestimo.3 }}</p>
+                    </div>
+                    <div>
+                        <p>Juros {{ emprestimo.4 }}</p>
+                    </div>
+                    <div>
+                        <p>Valor Parcela {{ emprestimo.5 }}</p>
+                    </div>
+                    <div>
+                        <p>Valor Total {{ emprestimo.6 }}</p>
+                    </div>
+                    <div>
+                        <p>Status {{ emprestimo.7 }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/concessao/calculo_produto.js' %}"></script>
+{% endblock %}
