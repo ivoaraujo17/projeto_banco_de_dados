@@ -2,7 +2,7 @@ from django.db import models
 
 class Produto(models.Model):
     produto = models.AutoField(primary_key=True)
-    nome = models.CharField(choices=[('Emprestimo', 'Emprestimo'), ('Financiamento', 'Financiamento'), ('Concorcio', 'Concorcio')], 
+    nome = models.CharField(choices=[('Emprestimo', 'Emprestimo'), ('Financiamento', 'Financiamento'), ('Consorcio', 'Consorcio')], 
                             max_length=13)
     disponibilidade = models.CharField(choices=[('Corrente, Poupança, Salario','Corrente, Poupança, Salario'), ('Corrente', 'Corrente'),
                                                 ('Corrente, Salario', 'Corrente, Salario')], max_length=80)
