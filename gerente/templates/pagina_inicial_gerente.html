@@ -18,20 +18,20 @@
         </div>
         <div class="pt-5">
             <ul class="list-group" id="lista_emprestimos">
-                {% for emprestimo in concessoes %}
+                {% for concessao in concessoes %}
                     <li class="list-group-item">
                         <div class="flex justify-between">
                             <div class="w-6/12">
                                 <div class="px-2 py-1">
                                     <p>Cliente</p>
                                     <div class="form-control">
-                                        {{ emprestimo.12.2 }}
+                                        {{ concessao.12.2 }}
                                     </div>
                                 </div>
                                 <div class="px-2 py-1">
                                     <p>Renda</p>
                                     <div class="form-control">
-                                        {{ emprestimo.12.7 }}
+                                        {{ concessao.12.7 }}
                                     </div>
                                 </div>
                             </div>
@@ -39,20 +39,20 @@
                                 <div class="px-2 py-1">
                                     <p>Tipo de Conta</p>
                                     <div class="form-control">
-                                        {{ emprestimo.13.1 }}
+                                        {{ concessao.13.1 }}
                                     </div>
                                 </div>
                                 <div class="px-2 py-1">
                                     <p>Saldo</p>
                                     <div class="form-control">
-                                        {{ emprestimo.13.3 }}
+                                        {{ concessao.13.3 }}
                                     </div>
                                 </div>
                             </div>
                             <div class="w-6/12">
                                 <p class="flex px-2 py-1">Produtos ja contratados</p>
                                 <div class="flex px-2 py-1">
-                                    {% for produtos in emprestimo.14 %}
+                                    {% for produtos in concessao.14 %}
                                         <div class="w-full px-2 py-1">
                                             <p>{{produtos.0}}</p>
                                             <div class="form-control">
@@ -68,19 +68,19 @@
                                 <div class="px-2 py-1">
                                     <p>valor contratado</p>
                                     <div class="form-control">
-                                        {{ emprestimo.1 }}
+                                        {{ concessao.1 }}
                                     </div>
                                 </div>
                                 <div class="px-2 py-1">
                                     <p>Primeira Parcela</p>
                                     <div class="form-control">
-                                        {{ emprestimo.2 }}
+                                        {{ concessao.2 }}
                                     </div>
                                 </div>
                                 <div class="px-2 py-1">
                                     <p>Total de Parcelas</p>
                                     <div class="form-control">
-                                        {{ emprestimo.3 }}
+                                        {{ concessao.3 }}
                                     </div>
                                 </div>
                             </div>
@@ -88,56 +88,56 @@
                                 <div class="px-2 py-1">
                                     <p>Juros</p>
                                     <div class="form-control">
-                                        {{ emprestimo.4 }}
+                                        {{ concessao.4 }}
                                     </div>
                                 </div>
                                 <div class="px-2 py-1">
                                     <p>Valor Parcela</p>
                                     <div class="form-control">
-                                        {{ emprestimo.5 }}
+                                        {{ concessao.5 }}
                                     </div>
                                 </div>
                                 <div class="px-2 py-1">
                                     <p>Valor Total</p>
                                     <div class="form-control">
-                                        {{ emprestimo.6 }}
+                                        {{ concessao.6 }}
                                     </div>
                                 </div>
                             </div>
                             <div class="w-2/12">
-                                {% if emprestimo.7 == 'Em Analise' %}
+                                {% if concessao.7 == 'Em Analise' %}
                                     <div class="px-2 py-1">
                                         <p>Status</p>
                                         <div class="form-control bg-amber-400">
-                                            {{ emprestimo.7 }}
+                                            {{ concessao.7 }}
                                         </div>
                                     </div>
                                     <div class="px-2 py-1 flex justify-center">
-                                        <a href="{% url 'gerente:aprovar_concessao' concessao_id=emprestimo.0 decisao=1 %}">
+                                        <a href="{% url 'gerente:aprovar_concessao' concessao_id=concessao.0 decisao=1 %}">
                                             <button class="bg-green-600 hover:bg-green-700 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
                                                 Aprovar
                                             </button>
                                         </a>
                                     </div>
                                     <div class="px-2 py-1 flex justify-center">
-                                        <a href="{% url 'gerente:aprovar_concessao' concessao_id=emprestimo.0 decisao=0 %}">
+                                        <a href="{% url 'gerente:aprovar_concessao' concessao_id=concessao.0 decisao=0 %}">
                                             <button class="bg-red-600 hover:bg-red-700 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
                                                 Reprovar
                                             </button>
                                         </a>
                                     </div>
-                                {% elif emprestimo.7 == 'Aprovado' %}
+                                {% elif concessao.7 == 'Aprovado' %}
                                     <div class="px-2 py-1">
                                         <p>Status</p>
                                         <div class="form-control bg-green-500">
-                                            {{ emprestimo.7 }}
+                                            {{ concessao.7 }}
                                         </div>
                                     </div>
-                                {% elif emprestimo.7 == 'Reprovado' %}
+                                {% elif concessao.7 == 'Reprovado' %}
                                     <div class="px-2 py-1">
                                         <p>Status</p>
                                         <div class="form-control bg-red-600">
-                                            {{ emprestimo.7 }}
+                                            {{ concessao.7 }}
                                         </div>
                                     </div>
                                 {% endif %} 

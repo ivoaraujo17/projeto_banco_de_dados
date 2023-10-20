@@ -1,0 +1,110 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title %}
+    zenith_capital Financiamento
+{% endblock %}
+
+{% block head %}    
+
+{% endblock %}
+
+{% block content %}
+<div class="flex px-20 py-4 justify-center">
+    <div class="py-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded" style="width:75%;">
+        <div class="flex">
+            <div class="w-8/12">
+                <h1 class="text-2xl font-bold">Financiamentos</h1>
+            </div>
+            <div class="w-4/12">
+                <a href="{% url 'produto:financiamento' numero_conta=numero %}">
+                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                        Novo Financiamento
+                    </button>
+                </a>
+            </div>
+            <div class="w-2/12">
+                <a href="{% url 'conta_bancaria:minha_conta' numero_conta=numero %}">
+                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                        Voltar
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="pt-5">
+            <ul class="list-group" id="lista_financiamentos">
+                {% for financiamento in financiamentos %}
+                    <li class="list-group-item">
+                        <div class="flex justify-between">
+                            <div class="w-5/12">
+                                <div class="px-2 py-1">
+                                    <p>valor contratado</p>
+                                    <div class="form-control">
+                                        {{ financiamento.1 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Primeira Parcela</p>
+                                    <div class="form-control">
+                                        {{ financiamento.2 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Total de Parcelas</p>
+                                    <div class="form-control">
+                                        {{ financiamento.3 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-5/12">
+                                <div class="px-2 py-1">
+                                    <p>Juros</p>
+                                    <div class="form-control">
+                                        {{ financiamento.4 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Valor Parcela</p>
+                                    <div class="form-control">
+                                        {{ financiamento.5 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Valor Total</p>
+                                    <div class="form-control">
+                                        {{ financiamento.6 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-2/12 flex items-center">
+                                {% if financiamento.7 == 'Em Analise' %}
+                                    <div class="px-2 py-1">
+                                        <p>Status</p>
+                                        <div class="form-control bg-amber-400">
+                                            {{ financiamento.7 }}
+                                        </div>
+                                    </div>
+                                {% elif financiamento.7 == 'Aprovado' %}
+                                    <div class="px-2 py-1">
+                                        <p>Status</p>
+                                        <div class="form-control bg-green-500 text-white">
+                                            {{ financiamento.7 }}
+                                        </div>
+                                    </div>
+                                {% elif financiamento.7 == 'Reprovado' %}
+                                    <div class="px-2 py-1">
+                                        <p>Status</p>
+                                        <div class="form-control bg-red-600 text-white">
+                                            {{ financiamento.7 }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
