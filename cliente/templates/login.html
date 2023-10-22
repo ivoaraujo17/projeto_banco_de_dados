@@ -9,31 +9,27 @@
 {% endblock %}
 
 {% block content %}
-
-<div class="container justify-content-center w-25 bg-blue-200 rounded-lg my-40 py-7">
+<div class="container bg-gray-50 dark:bg-gray-800 shadow-lg rounded justify-content-center w-25 my-20 py-7">
     <form method="post">
-      {% csrf_token %}
-      {% for field in form %}
-          <div class="form-group">
-              <!-- form de login -->
-              {% if field.label == "Usuário" %}
-                  <label for="{{ field.id_for_label }}">Email</label>
-              {% else %}
-                  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-              {% endif %}
-              {{ field }}
-              {% if field.help_text %}
-                  <small class="form-text text-muted">{{ field.help_text }}</small>
-              {% endif %}
-              {% for error in field.errors %}
-                  <small class="form-text text-danger">{{ error }}</small>
-              {% endfor %}
-          </div>
-      {% endfor %}
-      <div class="text-center">
-      <button class= "bg-green-300 p-2 my-4 rounded-lg " type="submit">Entrar</button>
-    </div>
-  </form>
-  </div>
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <!-- form de login -->
+                {% if field.label == "Usuário" %}
+                    <label for="{{ field.id_for_label }}">Email</label>
+                {% else %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% endif %}
+                {{ field }}
+            </div>
+            {% if field.error %}
+                    <small class="form-text text-danger">{{ error }}</small>
+            {% endif %}
+        {% endfor %}
+        
+        <div class="text-center">
+            <button class= "bg-green-300 p-2 my-4 rounded-lg " type="submit">Entrar</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

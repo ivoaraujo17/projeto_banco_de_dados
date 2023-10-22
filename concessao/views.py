@@ -118,7 +118,7 @@ def consorcio(request, numero_conta):
                                         VALUES ('{cliente_cpf}', '{numero_conta}', '3', '{gerente_cpf}', '{valor_contratado}', 
                                                 '{data_primeiro_vencimento}', '{qtd_parcelas}', '{taxa_juros}', '{valor_parcela}', 
                                                 '{valor_total_pago}', 'Em Analise')""")
-                    return redirect('produto:consorcio_conta', numero_conta=numero_conta)
+                    return redirect('produto:consorcios_conta', numero_conta=numero_conta)
                 except Exception as e:
                     print(e)
                     return render(request, 'form_consorcio.html',{'form': form, 'erro': e})

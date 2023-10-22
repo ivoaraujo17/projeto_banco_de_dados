@@ -12,4 +12,5 @@ urlpatterns = [
     path('emprestimos_conta/<int:numero_conta>/', emprestimos_conta, name='emprestimos_conta'),
     path('financiamentos_conta/<int:numero_conta>/', financiamentos_conta, name='financiamentos_conta'),
     path('consorcios_conta/<int:numero_conta>/', consorcios_conta, name='consorcios_conta'),
+    path('excluir_produto/<int:concessao_id><int:numero_conta><int:produto_id>', excluir_produto, name='excluir_concessao'),
 ]

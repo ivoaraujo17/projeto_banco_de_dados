@@ -31,6 +31,13 @@ def criar_usuario(request):
 
 
 def criar_cliente(request):
+    # verifica se é gerente, @zenith_capital é o email do gerente
+    if 'zenith.com' == str(request.user.email).split('@')[1]:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT cpf FROM gerente_gerente WHERE email = %s", [request.user.email])
+            cpf = cursor.fetchone()
+        if not cpf == None:
+            return redirect('gerente:pagina_inicial', cpf_gerente=cpf[0])
     # Verificar se o cliente já tem cadastro
     with connection.cursor() as cursor:
         cursor.execute("SELECT COUNT(*) FROM cliente_cliente WHERE email = %s", [request.user.email])
