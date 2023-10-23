@@ -36,7 +36,7 @@ def pagina_inicial(request, cpf_gerente):
         conc.append(produtos_contratados)
         nova_lista.append(conc)
     
-    return render(request, 'pagina_inicial_gerente.html', {'concessoes': nova_lista})
+    return render(request, 'pagina_inicial_gerente.html', {'concessoes': nova_lista, 'gerente': True,})
 
 
 def aprovar_concessao(request, concessao_id, decisao):

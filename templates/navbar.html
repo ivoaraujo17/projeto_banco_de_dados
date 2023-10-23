@@ -39,7 +39,11 @@
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Zenith Capital</a>
+              {% if user.is_authenticated %}
+                <a class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Zenith Capital</a>
+              {% else %}
+                <a href="{% url 'homepage:homepage' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Zenith Capital</a>
+              {% endif %}
               {% if not user.is_authenticated %}
                 <a href="{% url 'cliente:criar_conta' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Criar Conta</a>
                 <a href="{% url 'cliente:login' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</a>
@@ -48,17 +52,24 @@
           </div>
         </div>
         <!-- botao de trocar de conta -->
-        <div>
+        <div class="px-3">
           {% if user.is_authenticated %}
-            <a href="{% url 'conta_bancaria:escolha_tipo_conta' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Trocar de conta</a>
+            {% if not gerente %}
+                  <a href="{% url 'conta_bancaria:escolha_tipo_conta' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Trocar de conta</a>
+            {% endif %}
           {% endif %}
         </div>
-        <div class="flex">
-          {% if user.is_authenticated %}
-              <p class="text-gray-300">{{ user.email }}</p>
-              <a href="{% url 'cliente:logout' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Logout</a>
-          {% endif %}
-        </div>
+        {% if user.is_authenticated %}
+          <div class="flex px-3 justify-center text-center">
+              <p class="text-gray-300 text-center">{{ user.email }}</p>
+          </div>
+          <div class="px-3 justify-center text-center">
+            <a href="{% url 'cliente:logout' %}" 
+              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+              Logout
+            </a>
+          </div>
+        {% endif %}  
       </div>
     </div>
   </nav>

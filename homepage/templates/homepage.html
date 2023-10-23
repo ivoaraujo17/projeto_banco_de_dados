@@ -5,55 +5,67 @@
 {% endblock %}
 
 {% block head %}    
-<link rel="stylesheet" type="text/css" href="{% static 'css/homepage/homepage.css' %}">
 {% endblock %}
 
 {% block content %}
-<div id="homepage" >
-        <div id="texto1">
-            <h1>Um banco que simplifica a sua vida</h1>
+<div class="overflow px-3 pt-4 py-5">
+        <div class="flex justify-center py-3">
+            <h1 class="font-family:Georgia text-[40px]">Um banco que simplifica a sua vida</h1>
         </div>
-        <p id="texto2">Com o Zenith Capital você pode fazer transferências, pagamentos, recargas, investimentos e muito mais.</p>
-        <button id="botao_abra"class="btn btn-primary" >Abra sua Conta</button>
+        <div class="flex justify-center py-3">
+            <p class="font-family:Georgia text-[24px]">
+                Com o Zenith Capital você pode fazer transferências, pagamentos, recargas, investimentos e muito mais.
+            </p>
+        </div>
+        <div class="flex justify-center py-3">
+            <a href="{% url 'cliente:criar_conta' %}">
+                <button id="botao_abra"class="btn btn-primary" >Abra sua Conta</button>
+            </a>
+        </div>     
 </div>
-
 <div id="tipo_conta" class="px-3 py-1 flex">
-    <div class="px-3  w-4/12">
-        <div id="poupanca" class="px-4 py-1 bg-slate-100 rounded-lg">
-            <div style="height: 150;">
+    <div class="px-3  w-full">
+        <div class="px-4 py-1 bg-slate-200 rounded-lg">
+            <div class="flex justify-center">
                 <h2 class="fs-1 py-2">Poupança</h2>
             </div>
-            <div class="text-center" style="height: 150;">
-                <p class ="text-break" style="height: 150;">Com a conta Poupança você pode fazer transferências, pagamentos, recargas, investimentos e muito mais.</p>
+            <div class="text-center">
+                <p class ="text-break">Com a conta Poupança você pode fazer transferências, pagamentos, recargas, investimentos e muito mais.</p>
             </div>
-            <div class="py-3" style="height: 150;">
-                <button href="#" class="btn btn-primary" style="height: 150;">Saiba Mais</button>
+            <div class="flex justify-center py-3 ">
+                <a href="{% url 'cliente:criar_conta' %}">
+                    <button class="btn btn-primary">Abra Sua Conta</button>
+                </a>
             </div>
         </div>
     </div>
-    <div class="px-3  w-4/12">
-        <div id="salario" class="px-4 py-1 bg-slate-100 rounded-lg">
-            <div style="height: 150;">
+    <div class="px-3 w-full">
+        <div class="px-4 py-1 bg-slate-200 rounded-lg">
+            <div class="flex justify-center">
                 <h2 class="fs-1 py-2">Salario</h2>
             </div>
-            <div class="text-center" style="height: 150;">
-                <p class ="text-break" style="height: 150;">Com a conta Salario você pode fazer transferências, pagamentos, recargas, investimentos e muito mais.</p>
+            <div class="text-center">
+                <p class ="text-break">Com a conta Salario você pode fazer transferências, pagamentos, recargas, investimentos e muito mais.</p>
             </div>
-            <div class="py-3" style="height: 150;">
-                <button href="#" class="btn btn-primary" style="height: 150;">Saiba Mais</button>
+            <div class="flex justify-center py-3 ">
+                <a href="{% url 'cliente:criar_conta' %}">
+                    <button class="btn btn-primary">Abra Sua Conta</button>
+                </a>
             </div>
         </div>
     </div>
-    <div class="px-3 w-4/12">
-        <div id="corrente" class="px-4 py-1 bg-slate-100 rounded-lg">
-            <div style="height: 150;">
+    <div class="px-3 w-full">
+        <div class="px-4 py-1 bg-slate-200 rounded-lg">
+            <div class="flex justify-center">
                 <h2 class="fs-1 py-2">Corrente</h2>
             </div>
-            <div class="text-center" style="height: 150;">
-                <p class ="text-break" style="height: 150;">Com a conta Corrente você pode fazer transferências, pagamentos, recargas, investimentos e muito mais.</p>
+            <div class="text-center">
+                <p class ="text-break">Com a conta Corrente você pode fazer transferências, pagamentos, recargas, investimentos e muito mais.</p>
             </div>
-            <div class="py-3" style="height: 150;">
-                <button href="#" class="btn btn-primary" style="height: 150;">Saiba Mais</button>
+            <div class="flex justify-center py-3 ">
+                <a href="{% url 'cliente:criar_conta' %}">
+                    <button href="#" class="btn btn-primary">Abra Sua Conta</button>
+                </a>
             </div>
             
         </div>
