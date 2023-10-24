@@ -11,4 +11,5 @@ urlpatterns = [
     path('criar_conta_poupanca/', criar_conta_poupanca, name='criar_conta_poupanca'),
     path('criar_conta_salario/', criar_conta_salario, name='criar_conta_salario'),
     path('minha_conta/<int:numero_conta>', minha_conta, name='minha_conta'),
+    path('minha_conta/<int:numero_conta>/boletos/',  include('boleto.urls')),
 ]

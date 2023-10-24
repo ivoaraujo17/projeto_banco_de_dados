@@ -28,7 +28,6 @@ def pagina_inicial(request):
     else:
         return redirect('conta_bancaria:escolha_tipo_conta')
 
-
 def criar_conta_corrente(request):
     # verifica se o cliente ja tem uma conta corrente
     with connection.cursor() as cursor:
@@ -175,4 +174,4 @@ def minha_conta(request, numero_conta):
                     'cliente': conta[5],
                     'gerente': conta[6],
                     }
-                    )   
+                    )

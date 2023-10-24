@@ -1,0 +1,86 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title %}
+    zenith_capital boletos
+{% endblock %}
+
+{% block head %}    
+
+{% endblock %}
+
+{% block content %}
+<div class="flex px-20 py-4 justify-center">
+    <div class="py-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded" style="width:75%;">
+        <div class="flex">
+            <div class="w-8/12">
+                <h1 class="text-2xl font-bold">Boletos Gerados</h1>
+            </div>
+            <div class="w-5/12 px-2">
+                <a href="{% url 'conta_bancaria:boleto:gerar_boleto' numero_conta=numero %}">
+                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                        Gerar Novo Boleto de Deposito
+                    </button>
+                </a>
+            </div>
+            <div class="w-1/12">
+                <a href="{% url 'conta_bancaria:minha_conta' numero_conta=numero %}">
+                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                        Voltar
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="pt-5">
+            <ul class="list-group" id="lista_consorcios">
+                {% for boleto in boletos %}
+                    <li class="list-group-item">
+                        <div class="flex justify-between">
+                            <div class="w-5/12">
+                                <div class="px-2 py-1">
+                                    <p>Numero</p>
+                                    <div class="form-control">
+                                        {{ boleto.0 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Valor</p>
+                                    <div class="form-control">
+                                        {{ boleto.1 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Data de Vencimento</p>
+                                    <div class="form-control">
+                                        {{ boleto.2 }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-5/12">
+                                <div class="px-2 py-1">
+                                    <p>Data Pagamento</p>
+                                    <div class="form-control">
+                                        {{ boleto.3 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    {% if boleto.5 == False %}
+                                        <p>Status</p>
+                                        <div class="form-control bg-amber-400">
+                                            Pendente
+                                        </div>
+                                    {% else %}
+                                        <p>Status</p>
+                                        <div class="form-control bg-green-500 text-white">
+                                            Pago
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

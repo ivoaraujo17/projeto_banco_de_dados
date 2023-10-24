@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'conta',
     'produto',
     'concessao',
+    'boleto',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ['templates', 'homepage/templates', 'gerente/templates', 'conta/templates', 
-                 'produto/templates', 'concessao/templates'],
+                 'produto/templates', 'concessao/templates', 'boleto/templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
