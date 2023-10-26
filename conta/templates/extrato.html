@@ -1,0 +1,72 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title %}
+    zenith_capital Extrato
+{% endblock %}
+
+{% block head %}    
+
+{% endblock %}
+
+{% block content %}
+<div class="flex px-20 py-4 justify-center">
+    <div class="py-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded" style="width:75%;">
+        <div class="flex">
+            <div class="w-8/12">
+                <h1 class="text-2xl font-bold">Extrato</h1>
+            </div>
+            <div class="w-2/12">
+                <a href="{% url 'conta_bancaria:minha_conta' numero_conta=numero %}">
+                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                        Voltar
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="pt-5">
+            <ul class="list-group" id="lista_transacao">
+                {% for transacao in transacoes %}
+                    <li class="list-group-item">
+                        <div class="flex justify-between">
+                            <div class="w-5/12">
+                                <div class="px-2 py-1">
+                                    <p>Tipo</p>
+                                    {% if transacao.1 == 'saida' %}
+                                        <div class="form-control bg-red-600 text-white">
+                                            {{ transacao.1 }}
+                                        </div>
+                                    {% else %}
+                                        <div class="form-control bg-green-600 text-white">
+                                            {{ transacao.1 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Valor</p>
+                                    <div class="form-control">
+                                        {{ transacao.2 }}
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="w-5/12">
+                                <div class="px-2 py-1">
+                                    <p>Data</p>
+                                    <div class="form-control">
+                                        {{ transacao.4 }}
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1">
+                                    <p>Descrição</p>
+                                    <div class="form-control">
+                                        {{ transacao.3 }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

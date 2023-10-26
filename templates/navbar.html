@@ -54,8 +54,8 @@
         <!-- botao de trocar de conta -->
         <div class="px-3">
           {% if user.is_authenticated %}
-            {% if not gerente %}
-                  <a href="{% url 'conta_bancaria:escolha_tipo_conta' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Trocar de conta</a>
+            {% if "gerente" not in request.path_info %}
+              <a href="{% url 'conta_bancaria:escolha_tipo_conta' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Trocar de conta</a>
             {% endif %}
           {% endif %}
         </div>

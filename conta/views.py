@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from django.db import connection
+from django.db import connection, transaction
+from django.db.utils import OperationalError, IntegrityError
 from django.shortcuts import redirect
+from .forms import *
+from django.utils import timezone
 
 # Create your views here.
 
@@ -175,3 +178,63 @@ def minha_conta(request, numero_conta):
                     'gerente': conta[6],
                     }
                     )
+
+def transferencia(request, numero_conta):
+    if request.method == 'POST':
+        form = FormTransferencia(request.POST)
+        if form.is_valid():
+            conta_destino = form.cleaned_data['numero_conta']
+            valor = form.cleaned_data['valor']
+            if valor <= 0:
+                    return render(request, 'form_transferencia.html', 
+                                    {'form': form, 'mensagem':'Valor inválido', 'numero':numero_conta})
+            # busca a conta destino e o saldo da conta atual 
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT saldo FROM conta_conta_bancaria WHERE numero = %s", [conta_destino])
+                saldo_conta_destino = cursor.fetchone()
+                cursor.execute("SELECT saldo FROM conta_conta_bancaria WHERE numero = %s", [numero_conta])
+                saldo_conta = cursor.fetchone()
+            # verifica se as contas existem
+            if saldo_conta_destino:
+                saldo_conta_destino = saldo_conta_destino[0]
+                saldo = saldo_conta[0]
+                if saldo < valor:
+                    return render(request, 'form_transferencia.html', 
+                                    {'form': form, 'mensagem':'Você não possui saldo suficiente para realizar a transação!', 'numero':numero_conta})
+                # lanca a saida em transferencias da conta atual e a entrada na conta destino, atualizando os saldos
+                try:
+                    with transaction.atomic():
+                        with connection.cursor() as cursor:
+                            cursor.execute(f"""UPDATE conta_conta_bancaria SET saldo = {saldo - valor}
+                                                WHERE numero = {numero_conta}
+                                                """)
+                            cursor.execute(f"""INSERT INTO conta_transacao (tipo, conta_id, valor, descricao, data_hora)
+                                                VALUES ('saida', {numero_conta}, {valor}, '{'transferencia:conta:' + str(conta_destino)}', '{timezone.now()}')
+                                                """)
+                            cursor.execute(f"""INSERT INTO conta_transacao (tipo, conta_id, valor, descricao, data_hora)
+                                                VALUES ('entrada', {conta_destino}, {valor}, '{'transferencia:conta:' + str(numero_conta)}', '{timezone.now()}')
+                                                """)
+                            cursor.execute(f"""UPDATE conta_conta_bancaria SET saldo = {saldo_conta_destino + valor}
+                                                WHERE numero = {conta_destino}
+                                                """)
+                        return redirect('conta_bancaria:extrato', numero_conta)
+                except IntegrityError as e:
+                    transaction.set_rollback(True)
+                    return render(request, 'form_transferencia.html', 
+                                    {'form': form, 'mensagem':'Erro ao realizar a transação, tente novamente!', 'numero':numero_conta})
+            else:
+                return render(request, 'form_transferencia.html', 
+                                {'form': form, 'mensagem':'Conta destino não existe, verifique o número!', 'numero':numero_conta})    
+        else:
+            return render(request, 'form_transferencia.html',
+                                    {'form': form, 'mensagem':'Formulário invalido', 'numero':numero_conta})
+    else:
+        form = FormTransferencia()
+        return render(request, 'form_transferencia.html', {'form':form, 'numero':numero_conta})
+
+def extrato(request, numero_conta):
+    # busca a conta
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM conta_transacao WHERE conta_id = %s", [numero_conta])
+        transacoes = cursor.fetchall()
+    return render(request, 'extrato.html', {'transacoes':transacoes, 'numero':numero_conta})

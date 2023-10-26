@@ -1,0 +1,54 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title %}
+    zenith_capital transferencia
+{% endblock %}
+
+{% block head %}    
+
+{% endblock %}
+
+{% block content %}
+<div class="flex px-20 py-4 justify-center">
+    <div class="py-3 px-2 bg-gray-50 dark:bg-gray-800 shadow-lg rounded" style="width:50%;">
+        <div class="flex">
+            <div class="w-10/12">
+                <h1 class="text-2xl font-bold">Transferencia</h1>
+            </div>
+            <div class="w-2/12">
+                <a href="{% url 'conta_bancaria:minha_conta' numero_conta=numero %}">
+                    <button class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                        Voltar
+                    </button>
+                </a>
+            </div>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="flex pt-5 justify-center">
+                <div class="px-3">
+                    <div>   
+                        {{form.numero_conta.label_tag}}
+                        {{form.numero_conta}}
+                    </div>
+                    <div>   
+                        {{form.valor.label_tag}}
+                        {{form.valor}}
+                    </div>
+                </div>
+            </div>
+
+            {% if mensagem %}
+                <div class="flex justify-center">
+                    <p style="color:red;">{{ mensagem }}</p>
+                </div>  
+            {% endif %}
+            <div class="flex justify-center pt-4">
+                <button type="submit" class="bg-purple-900 hover:bg-purple-950 text-white text-[16px] rounded-lg px-3 py-2 text-center inline-flex items-center">
+                    Transferir
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

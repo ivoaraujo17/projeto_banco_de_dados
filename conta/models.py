@@ -13,3 +13,13 @@ class Conta_bancaria(models.Model):
 
     def __str__(self):
         return f'Conta: {self.numero} | Tipo: {self.tipo_conta} | Cliente: {self.cliente}'
+
+class Transacao(models.Model):
+    id = models.AutoField(primary_key=True)
+    tipo = models.CharField(choices=[('entrada', 'entrada'), ('saida', 'saida')], max_length=7)
+    conta = models.ForeignKey('conta.Conta_bancaria', related_name='transacoes_origem', on_delete=models.PROTECT, to_field='numero')
+    valor = models.FloatField()
+    descricao = models.CharField(max_length=100)
+    data_hora = models.DateTimeField(auto_now_add=True)
+
+
