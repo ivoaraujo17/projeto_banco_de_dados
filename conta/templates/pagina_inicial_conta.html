@@ -67,30 +67,58 @@
             </div>
         </div>
         <div class="md:flex justify-center">
-            <div class="flex justify-center">
-                <a href="{% url 'produto:emprestimos_conta' numero_conta=numero %}">
-                    <button class="shadow-lg rounded bg-purple-950 p-4 m-2 " style="color:aliceblue; width: 150px;">
-                        <h1 class="bi w-full px-1 py-3 bi-wallet2 display-2"></h1>
-                        <h1 class="w-full">emprestimo</h1> 
-                    </button>
-                </a>
-            </div>
-            <div class="flex justify-center">
-                <a href="{% url 'produto:financiamentos_conta' numero_conta=numero %}">
-                    <button class="shadow-lg rounded bg-purple-950 p-4 m-2" style="color:aliceblue; width: 150px;">
-                        <h1 class="bi w-full px-1 py-3 bi-building display-2"></h1>
-                        <h1 class="w-full">financiamento</h1>
-                    </button>
-                </a>
-            </div>
-            <div class="flex justify-center">
-                <a href="{% url 'produto:consorcios_conta' numero_conta=numero %}">
-                    <button class="shadow-lg rounded bg-purple-950 p-4 m-2 " style="color:aliceblue; width: 150px;">
-                        <h1 class="bi w-full px-1 py-3 bi-key display-2"></h1>
-                        <h1 class="w-full">consorcio</h1>
-                    </button>
-                </a>
-            </div>
+            {% if tipo_conta == 'Corrente' %}
+                <div class="flex justify-center">
+                    <a href="{% url 'produto:emprestimos_conta' numero_conta=numero %}">
+                        <button class="shadow-lg rounded bg-purple-950 p-4 m-2 " style="color:aliceblue; width: 150px;">
+                            <h1 class="bi w-full px-1 py-3 bi-wallet2 display-2"></h1>
+                            <h1 class="w-full">emprestimo</h1> 
+                        </button>
+                    </a>
+                </div>
+                <div class="flex justify-center">
+                    <a href="{% url 'produto:financiamentos_conta' numero_conta=numero %}">
+                        <button class="shadow-lg rounded bg-purple-950 p-4 m-2" style="color:aliceblue; width: 150px;">
+                            <h1 class="bi w-full px-1 py-3 bi-building display-2"></h1>
+                            <h1 class="w-full">financiamento</h1>
+                        </button>
+                    </a>
+                </div>
+                <div class="flex justify-center">
+                    <a href="{% url 'produto:consorcios_conta' numero_conta=numero %}">
+                        <button class="shadow-lg rounded bg-purple-950 p-4 m-2 " style="color:aliceblue; width: 150px;">
+                            <h1 class="bi w-full px-1 py-3 bi-key display-2"></h1>
+                            <h1 class="w-full">consorcio</h1>
+                        </button>
+                    </a>
+                </div>
+            {% elif tipo_conta == 'Salario' %}
+                <div class="flex justify-center">
+                    <a href="{% url 'produto:emprestimos_conta' numero_conta=numero %}">
+                        <button class="shadow-lg rounded bg-purple-950 p-4 m-2 " style="color:aliceblue; width: 150px;">
+                            <h1 class="bi w-full px-1 py-3 bi-wallet2 display-2"></h1>
+                            <h1 class="w-full">emprestimo</h1> 
+                        </button>
+                    </a>
+                </div>
+                <div class="flex justify-center">
+                    <a href="{% url 'produto:consorcios_conta' numero_conta=numero %}">
+                        <button class="shadow-lg rounded bg-purple-950 p-4 m-2 " style="color:aliceblue; width: 150px;">
+                            <h1 class="bi w-full px-1 py-3 bi-key display-2"></h1>
+                            <h1 class="w-full">consorcio</h1>
+                        </button>
+                    </a>
+                </div>
+            {% else %}
+                <div class="flex justify-center">
+                    <a href="{% url 'produto:emprestimos_conta' numero_conta=numero %}">
+                        <button class="shadow-lg rounded bg-purple-950 p-4 m-2 " style="color:aliceblue; width: 150px;">
+                            <h1 class="bi w-full px-1 py-3 bi-wallet2 display-2"></h1>
+                            <h1 class="w-full">emprestimo</h1> 
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
