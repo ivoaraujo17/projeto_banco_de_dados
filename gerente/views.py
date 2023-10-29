@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db import connection
 from django.shortcuts import redirect
+from django.utils import timezone
 
 # Create your views here.
 def pagina_inicial(request, cpf_gerente):
@@ -50,6 +51,15 @@ def aprovar_concessao(request, concessao_id, decisao):
                 numero_conta = concessao[9]
                 valor = concessao[1]
                 cursor.execute(f"""UPDATE conta_conta_bancaria SET saldo = saldo + {valor} WHERE numero = {numero_conta}""")
+                if concessao[11] == 1:
+                    descricao = 'Produto:Emprestimo'
+                elif concessao[11] == 2:
+                    descricao = 'Produto:Financiamento'
+                else:
+                    descricao = 'Produto:Consorcio'
+                cursor.execute(f"""INSERT INTO conta_transacao (tipo, conta_id, valor, descricao, data_hora)
+                                                VALUES ('entrada', {numero_conta}, {valor}, '{descricao}', '{timezone.now()}')
+                                                """)
         except:
             return redirect('gerente:pagina_inicial', cpf_gerente=concessao[10], error='Erro ao aprovar concessão')
         else:
@@ -60,3 +70,4 @@ def aprovar_concessao(request, concessao_id, decisao):
             cursor.execute(f"""SELECT gerente_id FROM concessao_concessao WHERE concessao = {concessao_id}""")
             concessao = cursor.fetchone()
             return redirect('gerente:pagina_inicial', cpf_gerente=concessao[0])
+
