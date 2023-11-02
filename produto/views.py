@@ -15,7 +15,7 @@ def emprestimos_conta(request, numero_conta):
 def financiamentos_conta(request, numero_conta):
     # recupera os financiamentos da conta
     with connection.cursor() as cursor:
-        cursor.execute(f"""SELECT * FROM financiamentos WHERE conta_id = '{numero_conta}' and produto_id = 2""")
+        cursor.execute(f"""SELECT * FROM financiamentos WHERE conta_id = '{numero_conta}'""")
         financiamentos = cursor.fetchall()
         print(financiamentos)
     return render(request, 'financiamentos_conta.html', {'numero': numero_conta, 'financiamentos': financiamentos})
@@ -23,7 +23,7 @@ def financiamentos_conta(request, numero_conta):
 def consorcios_conta(request, numero_conta):
     # recupera os consorcios da conta
     with connection.cursor() as cursor:
-        cursor.execute(f"""SELECT * FROM consorcios WHERE conta_id = '{numero_conta}' and produto_id = 3""")
+        cursor.execute(f"""SELECT * FROM consorcios WHERE conta_id = '{numero_conta}'""")
         consorcio = cursor.fetchall()
         print(consorcio)
     return render(request, 'consorcios_conta.html', {'numero': numero_conta, 'consorcios': consorcio})
