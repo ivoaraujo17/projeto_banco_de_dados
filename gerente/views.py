@@ -50,7 +50,6 @@ def aprovar_concessao(request, concessao_id, decisao):
                 concessao = cursor.fetchone()
                 numero_conta = concessao[9]
                 valor = concessao[1]
-                cursor.execute(f"""UPDATE conta_conta_bancaria SET saldo = saldo + {valor} WHERE numero = {numero_conta}""")
                 if concessao[11] == 1:
                     descricao = 'Produto:Emprestimo'
                 elif concessao[11] == 2:

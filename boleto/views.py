@@ -38,12 +38,11 @@ def pagar_boleto(request):
             # se o boleto é valido
             if boleto:
                 # se o boleto não foi pago
-                if not boleto[5]:
+                if not boleto[4]:
                     # busca as informações da conta
                     with connection.cursor() as cursor:
-                        cursor.execute('SELECT * FROM conta_conta_bancaria WHERE numero = %s', [boleto[4]])
+                        cursor.execute('SELECT * FROM conta_conta_bancaria WHERE numero = %s', [boleto[5]])
                         conta = cursor.fetchone()
-                        cursor.execute('UPDATE conta_conta_bancaria SET saldo = %s WHERE numero = %s', [conta[3]+boleto[1], conta[0]])
                         cursor.execute('UPDATE boleto_boleto SET pago = %s, data_pagamento = %s WHERE numero = %s', [True, timezone.now().date(), boleto[0]])
                         cursor.execute(f"""INSERT INTO conta_transacao (tipo, conta_id, valor, descricao, data_hora)
                                                 VALUES ('entrada', {conta[0]}, {boleto[1]}, 'Boleto:Pagamento', '{timezone.now()}')

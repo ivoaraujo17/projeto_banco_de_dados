@@ -25,7 +25,7 @@ def pagina_inicial(request):
 
     if contas:
         if len(contas) == 1:
-            return redirect('conta_bancaria:minha_conta', numero_conta=contas[0])
+            return redirect('conta_bancaria:minha_conta', numero_conta=contas[0][0])
         else:
             return redirect('conta_bancaria:escolha_tipo_conta')
     else:
@@ -205,17 +205,11 @@ def transferencia(request, numero_conta):
                 try:
                     with transaction.atomic():
                         with connection.cursor() as cursor:
-                            cursor.execute(f"""UPDATE conta_conta_bancaria SET saldo = {saldo - valor}
-                                                WHERE numero = {numero_conta}
-                                                """)
                             cursor.execute(f"""INSERT INTO conta_transacao (tipo, conta_id, valor, descricao, data_hora)
                                                 VALUES ('saida', {numero_conta}, {valor}, '{'transferencia:conta:' + str(conta_destino)}', '{timezone.now()}')
                                                 """)
                             cursor.execute(f"""INSERT INTO conta_transacao (tipo, conta_id, valor, descricao, data_hora)
                                                 VALUES ('entrada', {conta_destino}, {valor}, '{'transferencia:conta:' + str(numero_conta)}', '{timezone.now()}')
-                                                """)
-                            cursor.execute(f"""UPDATE conta_conta_bancaria SET saldo = {saldo_conta_destino + valor}
-                                                WHERE numero = {conta_destino}
                                                 """)
                         return redirect('conta_bancaria:extrato', numero_conta)
                 except IntegrityError as e:

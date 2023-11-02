@@ -80,11 +80,27 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+import os
+def senha_banco():
+    try:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        caminho = os.path.join(base_dir, "..","..", 'senha_banco.txt')
+        print(caminho)
+        with open(caminho) as senha_banco:
+            senha = senha_banco.read()
+        return senha
+    except FileNotFoundError:
+        print('Arquivo não encontrado')
+        return None
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'zenith_capital',
+        'USER': 'postgres',
+        'PASSWORD': f'{senha_banco()}',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
