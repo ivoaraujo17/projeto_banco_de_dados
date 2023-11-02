@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 def emprestimos_conta(request, numero_conta):
     # recupera os emprestimos da conta
     with connection.cursor() as cursor:
-        cursor.execute(f"""SELECT * FROM concessao_concessao WHERE conta_id = '{numero_conta}' and produto_id = 1""")
+        cursor.execute(f"""SELECT * FROM emprestimos WHERE conta_id = '{numero_conta}'""")
         emprestimos = cursor.fetchall()
         print(emprestimos)
     return render(request, 'emprestimos_conta.html', {'numero': numero_conta, 'emprestimos': emprestimos})
@@ -15,7 +15,7 @@ def emprestimos_conta(request, numero_conta):
 def financiamentos_conta(request, numero_conta):
     # recupera os financiamentos da conta
     with connection.cursor() as cursor:
-        cursor.execute(f"""SELECT * FROM concessao_concessao WHERE conta_id = '{numero_conta}' and produto_id = 2""")
+        cursor.execute(f"""SELECT * FROM financiamentos WHERE conta_id = '{numero_conta}' and produto_id = 2""")
         financiamentos = cursor.fetchall()
         print(financiamentos)
     return render(request, 'financiamentos_conta.html', {'numero': numero_conta, 'financiamentos': financiamentos})
@@ -23,7 +23,7 @@ def financiamentos_conta(request, numero_conta):
 def consorcios_conta(request, numero_conta):
     # recupera os consorcios da conta
     with connection.cursor() as cursor:
-        cursor.execute(f"""SELECT * FROM concessao_concessao WHERE conta_id = '{numero_conta}' and produto_id = 3""")
+        cursor.execute(f"""SELECT * FROM consorcios WHERE conta_id = '{numero_conta}' and produto_id = 3""")
         consorcio = cursor.fetchall()
         print(consorcio)
     return render(request, 'consorcios_conta.html', {'numero': numero_conta, 'consorcios': consorcio})
