@@ -17,15 +17,15 @@ function calcular(){
         taxa_juros.value = 10;
     } 
     else if (qtd_parcelas_value > 36){
-        taxa_juros.value = 18;
+        taxa_juros.value = 12;
     }
-    //
-    //if (data_primeiro_vencimento_value == 45){
-    //    taxa_juros.value = parseFloat(taxa_juros_value) + 0.5;
-    //}
-    //else if (data_primeiro_vencimento_value == 60){
-    //    taxa_juros.value = parseFloat(taxa_juros_value) + 1;
-    //}
+    
+    if (data_primeiro_vencimento_value == 45){
+        taxa_juros.value = parseFloat(taxa_juros_value) + 0.5;
+    }
+    else if (data_primeiro_vencimento_value == 60){
+        taxa_juros.value = parseFloat(taxa_juros_value) + 1;
+    }
 
     console.log(qtd_parcelas_value)
     const valor_juros = (valor_contratado_value * taxa_juros_value) / 100;
@@ -35,6 +35,6 @@ function calcular(){
     valor_total_pago.value = valor_total.toFixed(2);
 }
 
-qtd_parcelas.addEventListener('change', calcular());
-valor_contratado.addEventListener('change', calcular());
-data_primeiro_vencimento.addEventListener('change', calcular());
+qtd_parcelas.addEventListener('change', calcular);
+valor_contratado.addEventListener('change', calcular);
+data_primeiro_vencimento.addEventListener('change', calcular);
