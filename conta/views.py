@@ -206,7 +206,7 @@ def transferencia(request, numero_conta):
                     with transaction.atomic():
                         with connection.cursor() as cursor:
                             cursor.execute(f"""INSERT INTO conta_transacao (tipo, conta_id, valor, descricao, data_hora)
-                                                VALUES ('saida', {numero_conta}, {valor}, '{'transferencia:conta:' + str(conta_destino)}', '{timezone.now()}')
+                                                VALUES ('saida', {numero_conta}, {-valor}, '{'transferencia:conta:' + str(conta_destino)}', '{timezone.now()}')
                                                 """)
                             cursor.execute(f"""INSERT INTO conta_transacao (tipo, conta_id, valor, descricao, data_hora)
                                                 VALUES ('entrada', {conta_destino}, {valor}, '{'transferencia:conta:' + str(numero_conta)}', '{timezone.now()}')
@@ -229,6 +229,10 @@ def transferencia(request, numero_conta):
 def extrato(request, numero_conta):
     # busca a conta
     with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM conta_transacao WHERE conta_id = %s", [numero_conta])
+        cursor.execute("""SELECT * 
+                            FROM conta_transacao 
+                            WHERE conta_id = %s
+                            order by data_hora desc""", [numero_conta])
         transacoes = cursor.fetchall()
     return render(request, 'extrato.html', {'transacoes':transacoes, 'numero':numero_conta})
+

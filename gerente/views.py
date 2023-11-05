@@ -7,21 +7,22 @@ from django.utils import timezone
 def pagina_inicial(request, cpf_gerente):
     # recupera todas as concessoes em analise
     with connection.cursor() as cursor:
-        cursor.execute(f"""SELECT * FROM concessao_concessao WHERE status = 'Em Analise' and gerente_id = {cpf_gerente}""")
+        cursor.execute(f"""SELECT * FROM concessao_concessao WHERE status = 'Em Analise' and gerente_id = '{cpf_gerente}'""")
         concessoes = cursor.fetchall()
-    
+    print(concessoes)
+    print(cpf_gerente)
     # recupera as informações do cliente e da conta
     nova_lista = []
     for concessao in concessoes:
         conc = list(concessao)
         cpf_cliente = concessao[8]
         with connection.cursor() as cursor:
-            cursor.execute(f"""SELECT * FROM cliente_cliente WHERE cpf = {cpf_cliente}""")
+            cursor.execute(f"""SELECT * FROM cliente_cliente WHERE cpf = '{cpf_cliente}'""")
             cliente = cursor.fetchone()
         conc.append(cliente)
         numero_conta = concessao[9]
         with connection.cursor() as cursor:
-            cursor.execute(f"""SELECT * FROM conta_conta_bancaria WHERE numero = {numero_conta}""")
+            cursor.execute(f"""SELECT * FROM conta_conta_bancaria WHERE numero = '{numero_conta}'""")
             conta = cursor.fetchone()
         conc.append(conta)
         
@@ -30,7 +31,7 @@ def pagina_inicial(request, cpf_gerente):
             cursor.execute(f"""SELECT nome, count(produto_id)
                                 FROM concessao_concessao 
                                 join produto_produto on produto_id = produto
-                                WHERE status = 'Aprovado' and cliente_id = {cpf_cliente}
+                                WHERE status = 'Aprovado' and cliente_id = '{cpf_cliente}'
                                 group by nome
                                 """)
             produtos_contratados = cursor.fetchall()
