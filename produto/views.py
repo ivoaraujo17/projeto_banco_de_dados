@@ -33,7 +33,7 @@ def excluir_produto(request, concessao_id, numero_conta, produto_id):
         cursor.execute(f"""DELETE FROM concessao_concessao WHERE concessao = '{concessao_id}'""")
     if produto_id == 1:
         return redirect('produto:emprestimos_conta', numero_conta=numero_conta)
-    elif produto_id == 2:
-        return redirect('produto:financiamentos_conta', numero_conta=numero_conta)
     elif produto_id == 3:
+        return redirect('produto:financiamentos_conta', numero_conta=numero_conta)
+    elif produto_id == 2:
         return redirect('produto:consorcios_conta', numero_conta=numero_conta)

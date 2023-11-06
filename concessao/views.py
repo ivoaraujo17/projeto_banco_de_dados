@@ -74,7 +74,7 @@ def financiamento(request, numero_conta):
                                         (cliente_id, conta_id, produto_id, gerente_id, valor_contratado, 
                                         data_primeiro_vencimento, qtd_parcelas, juros, valor_parcela, 
                                         valor_total, status) 
-                                        VALUES ('{cliente_cpf}', '{numero_conta}', '2', '{gerente_cpf}', '{valor_contratado}', 
+                                        VALUES ('{cliente_cpf}', '{numero_conta}', '3', '{gerente_cpf}', '{valor_contratado}', 
                                                 '{data_primeiro_vencimento}', '{qtd_parcelas}', '{taxa_juros}', '{valor_parcela}', 
                                                 '{valor_total_pago}', 'Em Analise')""")
                     return redirect('produto:financiamentos_conta', numero_conta=numero_conta)
@@ -115,7 +115,7 @@ def consorcio(request, numero_conta):
                                         (cliente_id, conta_id, produto_id, gerente_id, valor_contratado, 
                                         data_primeiro_vencimento, qtd_parcelas, juros, valor_parcela, 
                                         valor_total, status) 
-                                        VALUES ('{cliente_cpf}', '{numero_conta}', '3', '{gerente_cpf}', '{valor_contratado}', 
+                                        VALUES ('{cliente_cpf}', '{numero_conta}', '2', '{gerente_cpf}', '{valor_contratado}', 
                                                 '{data_primeiro_vencimento}', '{qtd_parcelas}', '{taxa_juros}', '{valor_parcela}', 
                                                 '{valor_total_pago}', 'Em Analise')""")
                     return redirect('produto:consorcios_conta', numero_conta=numero_conta)
